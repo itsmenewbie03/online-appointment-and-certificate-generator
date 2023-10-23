@@ -4,7 +4,8 @@
   const handle_submit = async (event) => {
     event.preventDefault();
     // change url to actual api url
-    const url = "https://postman-echo.com/post";
+    const url =
+      "https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/auth/admin/login";
     console.log(`logging in with ${email}:${password}`);
     // do the http request
     const resp = await fetch(url, {
