@@ -2,6 +2,7 @@
     let email;
     let password;
     import toast, { Toaster } from "svelte-french-toast";
+    import { goto } from "$app/navigation";
     const handle_submit = async (event) => {
         event.preventDefault();
         // change url to actual api url
@@ -25,14 +26,23 @@
         const _alert = status == 200 ? toast.success : toast.error;
         // we could add a bit of client side encryption here using AES, so even if someone peeks at the token they can't read it
         // i'll leave the implementation to you,
-
         if (status == 200) {
-            /**
-             * i'm having issues with localStorage being undefined
-             * I'll leave the implementation with you
-             */
             const { access_token, refresh_token } = body;
-            // you need to find way to store this persistently as this is the key to make authenticated request
+            localStorage.setItem("access_token", access_token);
+            /**
+             * TODO:
+             * Add Encryption with refresh_token as it is a long lived token
+             */
+            localStorage.setItem("refresh_token", refresh_token);
+            const t_id = toast.loading(
+                "Login success.\nYou are being redirected to the dashboard..."
+            );
+            // add a 1 second delay
+            setTimeout(() => {
+                goto("/");
+                toast.dismiss(t_id);
+            }, 1000);
+            return;
         }
         _alert(body.message);
         // now you can use the response
