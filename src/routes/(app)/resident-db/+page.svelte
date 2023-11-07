@@ -50,16 +50,21 @@
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
       <thead class="text-xs text-gray-50 uppercase bg-green-400">
         <tr>
-          <th scope="col" class="px-6 py-3"> Full Name </th>
-          <th scope="col" class="px-6 py-3"> Age </th>
-          <th scope="col" class="px-6 py-3"> Gender </th>
-          <th scope="col" class="px-6 py-3"> Extra Info </th>
+          <th scope="col" class="px-6 py-3"> Name </th>
+          <th scope="col" class="px-6 py-3"> Date of Birth </th>
+          <th scope="col" class="px-6 py-3"> Address </th>
+          <th scope="col" class="px-6 py-3"> Period of Residency </th>
+          <th scope="col" class="px-6 py-3"> Email </th>
+          <th scope="col" class="px-6 py-3"> Phone Number </th>
           <th scope="col" class="px-6 py-3">
+            Actions
             <span class="sr-only">Edit</span>
           </th>
         </tr>
       </thead>
-      <tbody>
+      <!-- Example tbody -
+      Delete inside once you start resident db integration  -->
+      <tbody id="resident"> 
         <tr class="bg-white border-b hover:bg-green-100">
           <th
             scope="row"
@@ -69,6 +74,8 @@
           </th>
           <td class="px-6 py-4"> 21 </td>
           <td class="px-6 py-4"> Male </td>
+          <td class="px-6 py-4"> Hehe :D </td>
+          <td class="px-6 py-4"> Hehe :D </td>
           <td class="px-6 py-4"> Hehe :D </td>
           <td class="px-6 py-4 text-right">
             <a
