@@ -26,18 +26,6 @@
                 class="ml-2 text-sm font-medium text-gray-900"
               >Employee</label>
             </div>
-            <div class="flex items-center mb-4">
-              <input
-                id="admin-checkbox"
-                type="checkbox"
-                value=""
-                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
-              />
-              <label
-                for="admin-checkbox"
-                class="ml-2 text-sm font-medium text-gray-900"
-              >Admin</label>
-            </div>
           </div>
           <form class="grid grid-cols-2 gap-6">
             <div>

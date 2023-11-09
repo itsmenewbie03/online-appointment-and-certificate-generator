@@ -1,3 +1,7 @@
+<svelte:head>
+    <script async src="https://www.google.com/recaptcha/api.js"></script>
+</svelte:head>
+
 <script>
     let email;
     let password;
@@ -47,6 +51,30 @@
         _alert(body.message);
         // now you can use the response
     };
+
+
+    //recaptcha stuff
+    function onSubmit(token) {
+        //no url
+     fetch('', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: `g-recaptcha-response=${token}`
+     })
+        .then(response => response.json())
+        .then(data => {
+            if(data.success){
+                console.log('success', data)
+            } else {
+                console.log('Server Side Error', data)
+            }
+        })
+        .catch(error => {
+            console.log('Client Side Error', error)
+        })
+   }
 </script>
 
 <Toaster />
@@ -93,6 +121,15 @@
                     >Password</label
                 >
             </div>
+
+            <!-- TEST BUTTON FOR RECAPTCHA -->
+            <!-- will change after integration or stuff happen -->
+            <form action="post" id="loginCaptcha">
+                <button class="g-recaptcha" 
+                data-sitekey="6LfKkAgpAAAAAFvfZUAebaKXbqgjDX9a7-Xu6KSN" 
+                data-callback='onSubmit' 
+                data-action='submit'>Submit</button>
+            </form>
 
             <button
                 type="submit"
