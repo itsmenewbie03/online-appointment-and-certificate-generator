@@ -1,81 +1,68 @@
 <svelte:head>
-    <script async src="https://www.google.com/recaptcha/api.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LfKkAgpAAAAAFvfZUAebaKXbqgjDX9a7-Xu6KSN" async defer></script>
 </svelte:head>
 
 <script>
+    import { onMount } from 'svelte';
     let email;
     let password;
     import toast, { Toaster } from "svelte-french-toast";
     import { goto } from "$app/navigation";
+
     const handle_submit = async (event) => {
         event.preventDefault();
-        // change url to actual api url
-        const url =
-            "https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/auth/admin/login";
-        console.log(`logging in with ${email}:${password}`);
+
+        const url = "https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/auth/admin/login";
+        
+        // Fetch reCAPTCHA token
+        const token = await grecaptcha.execute('6LfKkAgpAAAAAFvfZUAebaKXbqgjDX9a7-Xu6KSN', { action: 'submit' });
+
+        // Add the reCAPTCHA token to the form data
+        const formData = {
+            email: email,
+            password: password,
+            recaptcha_token: token,
+        };
+
         // do the http request
         const resp = await fetch(url, {
             method: "POST",
             headers: {
                 "content-type": "application/json",
             },
-            body: JSON.stringify({
-                email: email,
-                password: password,
-            }),
+            body: JSON.stringify(formData),
         }).then(async (res) => {
             return { status: res.status, body: await res.json() };
         });
+
         const { status, body } = resp;
         const _alert = status == 200 ? toast.success : toast.error;
-        // we could add a bit of client side encryption here using AES, so even if someone peeks at the token they can't read it
-        // i'll leave the implementation to you,
+
         if (status == 200) {
+            // Rest of your code for handling a successful login
             const { access_token, refresh_token } = body;
             localStorage.setItem("access_token", access_token);
-            /**
-             * TODO:
-             * Add Encryption with refresh_token as it is a long lived token
-             */
             localStorage.setItem("refresh_token", refresh_token);
-            const t_id = toast.loading(
-                "Login success.\nYou are being redirected to the dashboard..."
-            );
-            // add a 1 second delay
+            const t_id = toast.loading("Login success.\nYou are being redirected to the dashboard...");
             setTimeout(() => {
                 goto("/");
                 toast.dismiss(t_id);
             }, 1000);
-            return;
+        } else {
+            // Handle login failure
+            _alert(body.message);
         }
-        _alert(body.message);
-        // now you can use the response
     };
 
-
-    //recaptcha stuff
-    function onSubmit(token) {
-        //no url
-     fetch('', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: `g-recaptcha-response=${token}`
-     })
-        .then(response => response.json())
-        .then(data => {
-            if(data.success){
-                console.log('success', data)
-            } else {
-                console.log('Server Side Error', data)
-            }
-        })
-        .catch(error => {
-            console.log('Client Side Error', error)
-        })
-   }
+    onMount(() => {
+        grecaptcha.ready(() => {
+            grecaptcha.execute('6LfKkAgpAAAAAFvfZUAebaKXbqgjDX9a7-Xu6KSN', { action: 'submit' }).then(token => {
+                console.log('reCAPTCHA Token:', token);
+            });
+        });
+    });
 </script>
+
 
 <Toaster />
 <div class="grid h-screen place-items-center">
@@ -124,12 +111,8 @@
 
             <!-- TEST BUTTON FOR RECAPTCHA -->
             <!-- will change after integration or stuff happen -->
-            <form action="post" id="loginCaptcha">
-                <button class="g-recaptcha" 
-                data-sitekey="6LfKkAgpAAAAAFvfZUAebaKXbqgjDX9a7-Xu6KSN" 
-                data-callback='onSubmit' 
-                data-action='submit'>Submit</button>
-            </form>
+            <div id="div-recaptcha" class="g-recaptcha" >
+            </div>
 
             <button
                 type="submit"
