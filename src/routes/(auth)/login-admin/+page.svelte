@@ -9,23 +9,25 @@
 
     let email;
     let password;
-    let role = "user";
+    let role = "admin";
 
     const handle_submit = async (event) => {
         event.preventDefault();
 
         const url = "https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/auth/admin/login";
         
+        // Fetch reCAPTCHA token
         const token = await grecaptcha.execute('6LfKkAgpAAAAAFvfZUAebaKXbqgjDX9a7-Xu6KSN', { action: 'submit' });
 
+        // Add the reCAPTCHA token to the form data
         const formData = {
             email: email,
             password: password,
             recaptcha_token: token,
-            //idk if this will work xp
             role: role,
         };
 
+        // do the http request
         const resp = await fetch(url, {
             method: "POST",
             headers: {
@@ -66,8 +68,7 @@
 
 
 <Toaster />
-<!-- TODO for future me: Make images for each login so that
-    user knows where da hell they at -->
+
 
 
 <div class="flex justify-center">
@@ -83,6 +84,7 @@
         </li>
     </ul>
 </div>
+
 
 
 
