@@ -1,29 +1,22 @@
-<svelte:head>
-    <script src="https://www.google.com/recaptcha/api.js?render=6LfKkAgpAAAAAFvfZUAebaKXbqgjDX9a7-Xu6KSN" async defer></script>
-</svelte:head>
-
 <script>
-    import { onMount } from 'svelte';
+    import { onMount } from "svelte";
     import toast, { Toaster } from "svelte-french-toast";
     import { goto } from "$app/navigation";
 
     let email;
     let password;
-    let role = "admin";
+    let recaptcha_token;
 
     const handle_submit = async (event) => {
         event.preventDefault();
 
-        const url = "https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/auth/admin/login";
-        
-        const token = await grecaptcha.execute('6LfKkAgpAAAAAFvfZUAebaKXbqgjDX9a7-Xu6KSN', { action: 'submit' });
+        const url =
+            "https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/auth/admin/login";
 
         const formData = {
             email: email,
             password: password,
-            recaptcha_token: token,
-            //idk if this will work xp
-            role: role,
+            recaptcha_token: recaptcha_token,
         };
 
         const resp = await fetch(url, {
@@ -44,7 +37,9 @@
             const { access_token, refresh_token } = body;
             localStorage.setItem("access_token", access_token);
             localStorage.setItem("refresh_token", refresh_token);
-            const t_id = toast.loading("Login success.\nYou are being redirected to the dashboard...");
+            const t_id = toast.loading(
+                "Login success.\nYou are being redirected to the dashboard..."
+            );
             setTimeout(() => {
                 goto("/");
                 toast.dismiss(t_id);
@@ -57,34 +52,58 @@
 
     onMount(() => {
         grecaptcha.ready(() => {
-            grecaptcha.execute('6LfKkAgpAAAAAFvfZUAebaKXbqgjDX9a7-Xu6KSN', { action: 'submit' }).then(token => {
-                console.log('reCAPTCHA Token:', token);
-            });
+            grecaptcha
+                .execute("6LfKkAgpAAAAAFvfZUAebaKXbqgjDX9a7-Xu6KSN", {
+                    action: "submit",
+                })
+                .then((token) => {
+                    // console.log("reCAPTCHA Token:", token);
+                    recaptcha_token = token;
+                });
         });
     });
 </script>
 
+<svelte:head>
+    <script
+        src="https://www.google.com/recaptcha/api.js?render=6LfKkAgpAAAAAFvfZUAebaKXbqgjDX9a7-Xu6KSN"
+        async
+        defer
+    ></script>
+</svelte:head>
 
 <Toaster />
 <!-- TODO for future me: Make images for each login so that
     user knows where da hell they at -->
 
-
 <div class="flex justify-center">
-    <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
+    <ul
+        class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400"
+    >
         <li class="me-2">
-            <a href="/login-user" aria-current="page" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">User</a>
+            <a
+                href="/login-user"
+                aria-current="page"
+                class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+                >User</a
+            >
         </li>
         <li class="me-2">
-            <a href="/login-employee" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Employee</a>
+            <a
+                href="/login-employee"
+                class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+                >Employee</a
+            >
         </li>
         <li class="me-2">
-            <a href="/login" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Admin</a>
+            <a
+                href="/login"
+                class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+                >Admin</a
+            >
         </li>
     </ul>
 </div>
-
-
 
 <div class="grid h-screen place-items-center">
     <div
@@ -132,8 +151,7 @@
 
             <!-- TEST BUTTON FOR RECAPTCHA -->
             <!-- will change after integration or stuff happen -->
-            <div id="div-recaptcha" class="g-recaptcha" >
-            </div>
+            <div id="div-recaptcha" class="g-recaptcha" />
 
             <button
                 type="submit"

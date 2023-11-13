@@ -1,9 +1,13 @@
 import { redirect } from "@sveltejs/kit";
 import { OAuth2Client } from "google-auth-library";
 import { SECRET_CLIENT_ID, SECRET_CLIENT_SECRET } from "$env/static/private";
-
+/**
+ * TODO:
+ * fix the login by adding the recapthcha token - done
+ * fix the resident database integration
+ */
 export const actions = {
-  OAuth2: async ({}) => {
+  OAuth2: async ({ }) => {
     const redirectURL = "http://localhost:5173/oauth";
 
     console.log("id", SECRET_CLIENT_ID);
