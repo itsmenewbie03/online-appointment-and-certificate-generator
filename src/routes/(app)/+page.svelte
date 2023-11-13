@@ -57,5 +57,39 @@
 </script>
 
 <Toaster />
-<h1 class="py-8 px-4 border-4 border-indigo-900 shadow-lg">Welcome to Hell.</h1>
-<p>Visit <a href="/login">LOGIN</a> to read the documentation</p>
+
+<div class="mx-auto max-w-screen-lg">
+    <div class="text-center">
+        <div class="SubHeading text-green-500 text-lg font-semibold font-['Inter'] leading-relaxed">Welcome!</div>
+        <div>
+            <div class="SectionTitle text-gray-900 text-4xl font-bold font-['Inter'] leading-10">Announcement and Events</div>
+            <div class="NoMatterTheSizeO text-gray-500 text-base font-normal font-['Inter'] leading-normal">Here are the ANNOUNCEMENTS and EVENTS for BARANGAY BANGCUD</div>
+        </div>
+    </div>
+    <div class="text-center">
+      <div class="BlogGrid flex-col justify-start items-start gap-7 inline-flex">
+        <img class="BlogImage w-96 h-56 rounded" src="https://via.placeholder.com/370x220" />
+        <div class="Frame1000003810 flex-col justify-start items-start gap-6 flex">
+          <div class="Date px-3.5 py-1 bg-teal-500 rounded shadow-inner justify-center items-center gap-2.5 inline-flex">
+            <div class="Dec222023 text-white text-xs font-medium font-['Inter'] leading-tight">Mar 15, 2023</div>
+          </div>
+          <div class="Frame1000003809 flex-col justify-start items-start gap-3.5 flex">
+            <div class="MeetAutomanageTheBestAiManagementTools w-96 text-gray-900 text-2xl font-semibold font-['Inter'] leading-loose">Mr. & Ms. Bangcud</div>
+            <div class="LoremIpsumIsSimplyDummyTextOfThePrintingAndTypesettingIndustry w-96 text-gray-500 text-base font-normal font-['Inter'] leading-normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+          </div>
+        </div>
+      </div>
+      <div class="BlogGrid flex-col justify-start items-start gap-7 inline-flex">
+        <img class="BlogImage w-96 h-56 rounded" src="https://via.placeholder.com/370x220" />
+        <div class="Frame1000003810 flex-col justify-start items-start gap-6 flex">
+          <div class="Date px-3.5 py-1 bg-teal-500 rounded shadow-inner justify-center items-center gap-2.5 inline-flex">
+            <div class="Dec222023 text-white text-xs font-medium font-['Inter'] leading-tight">Jan 05, 2023</div>
+          </div>
+          <div class="Frame1000003809 flex-col justify-start items-start gap-3.5 flex">
+            <div class="MeetAutomanageTheBestAiManagementTools w-96 text-gray-900 text-2xl font-semibold font-['Inter'] leading-loose">File for candidacy is now open</div>
+            <div class="LoremIpsumIsSimplyDummyTextOfThePrintingAndTypesettingIndustry w-96 text-gray-500 text-base font-normal font-['Inter'] leading-normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

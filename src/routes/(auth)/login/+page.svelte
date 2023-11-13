@@ -9,7 +9,7 @@
 
     let email;
     let password;
-    let role = "user";
+    let role = "admin";
 
     const handle_submit = async (event) => {
         event.preventDefault();
@@ -73,13 +73,13 @@
 <div class="flex justify-center">
     <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
         <li class="me-2">
-            <a href="/login" aria-current="page" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">User</a>
+            <a href="/login-user" aria-current="page" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">User</a>
         </li>
         <li class="me-2">
             <a href="/login-employee" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Employee</a>
         </li>
         <li class="me-2">
-            <a href="/login-admin" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Admin</a>
+            <a href="/login" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Admin</a>
         </li>
     </ul>
 </div>
