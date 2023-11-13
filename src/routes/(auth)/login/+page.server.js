@@ -7,7 +7,7 @@ import { SECRET_CLIENT_ID, SECRET_CLIENT_SECRET } from "$env/static/private";
  * fix the resident database integration
  */
 export const actions = {
-  OAuth2: async ({ }) => {
+  OAuth2: async ({}) => {
     const redirectURL = "http://localhost:5173/oauth";
 
     console.log("id", SECRET_CLIENT_ID);
