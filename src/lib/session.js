@@ -4,17 +4,17 @@
  * @returns
  */
 const get_session_status = async (access_token) => {
-    const endpoint =
-        "https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/auth/session/status";
-    const opts = {
-        method: "GET",
-        headers: {
-            Authorization: `Bearer ${access_token}`,
-        },
-    };
-    return await fetch(endpoint, opts).then(async (res) => {
-        return { status: res.status, body: await res.json() };
-    });
+  const endpoint =
+    "https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/auth/session/status";
+  const opts = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  };
+  return await fetch(endpoint, opts).then(async (res) => {
+    return { status: res.status, body: await res.json() };
+  });
 };
 // fuck JS i really need TS
 /**
@@ -23,16 +23,16 @@ const get_session_status = async (access_token) => {
  * @returns
  */
 const get_new_access_token = async (refresh_token) => {
-    const endpoint =
-        "https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/auth/session/refresh";
-    const opts = {
-        method: "GET",
-        headers: {
-            Authorization: `Bearer ${refresh_token}`,
-        },
-    };
-    return await fetch(endpoint, opts).then(async (res) => {
-        return { status: res.status, body: await res.json() };
-    });
+  const endpoint =
+    "https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/auth/session/refresh";
+  const opts = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${refresh_token}`,
+    },
+  };
+  return await fetch(endpoint, opts).then(async (res) => {
+    return { status: res.status, body: await res.json() };
+  });
 };
 export { get_session_status, get_new_access_token };
