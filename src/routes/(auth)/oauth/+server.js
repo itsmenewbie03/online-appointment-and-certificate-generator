@@ -15,9 +15,37 @@ async function getUserData(access_token) {
 export const GET = async ({ url }) => {
   const redirectURL = "http://localhost:5173/oauth";
   const code = await url.searchParams.get("code");
-
+  // TODO: send this `code` to backend
   console.log("url is", url);
-  //console.log('returned state',state)
+
+  const login_endpoint =
+    "https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/oauth/google/login";
+  // INFO: make sure to change the role accordingly
+  const opts = {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      code: code,
+      role: "admin",
+    }),
+  };
+  const resp = await fetch(login_endpoint, opts).then(async (res) => {
+    return { status: res.status, body: await res.json() };
+  });
+  const { status, body } = resp;
+  if (status !== 200) {
+    console.log(`LOGIN ERROR:  cause => ${body.message}`);
+    // TODO: provided a feedback to the user what happened
+    throw redirect(303, "/login");
+  }
+  // INFO: this part is reached if the login is successfull
+  // we need to set the token now
+  const { access_token, refresh_token } = body;
+  // INFO: since we can access `localStorage` in the server, we would just pass it as a querystring
+  const auth_param = `${access_token}:${refresh_token}`;
+  throw redirect(300, `/?a=${btoa(auth_param)}`);
   console.log("returned code", code);
 
   try {
