@@ -4,16 +4,15 @@
         <tr>
           <th scope="col" class="px-6 py-3"> Name & Document </th>
           <th scope="col" class="px-6 py-3"> Appointment Status </th>
-          <th scope="col" class="px-6 py-3"> Payment Status </th>
           <th scope="col" class="px-6 py-3"> Date </th>
-          <th scope="col" class="px-6 py-3">
+          <th scope="col" class="px-6 py-3 text-right">
             Actions
-            <span class="sr-only">Edit</span>
           </th>
         </tr>
       </thead>
-      <!-- Example tbody -
-      Delete inside once you start resident db integration  -->
+      <!-- Example tbody 
+      Now do the integration magik  -->
+      
       <tbody id="resident"> 
         <tr class="bg-white border-b hover:bg-green-100">
             <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
@@ -23,9 +22,17 @@
                     <div class="font-normal text-gray-500">Document</div>
                 </div>  
             </th>
-          <td class="px-6 py-4"> 21 </td>
-          <td class="px-6 py-4"> Male </td>
-          <td class="px-6 py-4"> Hehe :D </td>
+          <td class="px-6 py-4">
+            <div class="relative inline-flex">
+              <select
+                class="text-white bg-green-400 border hover:border-green-500 px-4 py-2 pr-8 rounded-3xl"
+              >
+                <option>Correct</option>
+                <option>Incorrect</option>
+              </select>
+            </div>
+          </td>
+          <td class="px-6 py-4"> Date Crap </td>
           <td class="px-6 py-4 text-right">
             <a
               href="#"
