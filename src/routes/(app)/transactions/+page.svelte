@@ -1,5 +1,7 @@
 <script>
   import { onMount } from "svelte";
+  let current_status;
+  let target_id;
 
   let transactions = [];
   onMount(async () => {
@@ -28,7 +30,31 @@
       console.error("Error fetching transaction data:", error.message);
     }
   });
+  const update_status = async () => {
+    const endpoint =
+      "https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/transactions/update";
+    const opts = {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+      body: JSON.stringify({
+        id: target_id,
+        status: current_status,
+      }),
+    };
 
+    const resp = await fetch(endpoint, opts).then((res) => res.json());
+    // TODO: make this display in the frontend pretty xD
+    console.log(`UPDATE DIZZ: ${resp.message}`);
+    transactions = transactions.map((transaction) =>
+      transaction._id === target_id
+        ? { ...transaction, status: current_status }
+        : transaction
+    );
+    toggleModal();
+  };
   const format_date = (dateString) => {
     const originalDate = new Date(dateString);
     const formattedDate = originalDate.toLocaleDateString("en-US", {
@@ -37,6 +63,12 @@
       year: "numeric",
     });
     return formattedDate;
+  };
+  const show_edit_modal = (id, status) => {
+    console.log(`edit dizz: ${id} with status ${status}`);
+    target_id = id;
+    current_status = status;
+    toggleModal();
   };
 
   //Edit Modal
@@ -85,7 +117,9 @@
         <td class="px-6 py-3">{format_date(transaction.date)}</td>
         <td class="px-6 py-4 text-right">
           <a
-            on:click={toggleModal}
+            on:click={() => {
+              show_edit_modal(transaction._id, transaction.status);
+            }}
             href="#"
             class="font-medium pr-2 text-blue-600 dark:text-blue-500 hover:underline"
             >Edit</a
@@ -98,7 +132,6 @@
         </td>
       </tr>
     {/each}
-
   </table>
 </div>
 
@@ -110,20 +143,20 @@
   >
     <div class="bg-white p-8 rounded-lg">
       <h2 class="text-2xl mb-4">Modal Content</h2>
-      <p>This is a simple modal.</p>
-      {#each transactions as transaction (transaction._id)}
-        <select bind:value={transaction.status}>
-          <option value="pending">Pending</option>
-          <option value="completed">Completed</option>
-          <option value="rejected">Rejected</option>
-          <option value="waiting for payment">Waiting for Payment</option>
-        </select>
-      {/each}
+      <p>This is a simple modal for: {target_id}</p>
+      <select bind:value={current_status}>
+        <option value="pending">Pending</option>
+        <option value="completed">Completed</option>
+        <option value="rejected">Rejected</option>
+        <option value="waiting for payment">Waiting for Payment</option>
+      </select>
       <button
         class="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md"
-        on:click={toggleModal}
+        on:click={async () => {
+          await update_status();
+        }}
       >
-        Close Modal
+        Update Status
       </button>
     </div>
   </div>
