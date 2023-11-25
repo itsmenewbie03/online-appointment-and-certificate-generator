@@ -38,6 +38,13 @@
     });
     return formattedDate;
   };
+
+  //Edit Modal
+  let showModal = false;
+
+  function toggleModal() {
+    showModal = !showModal;
+  }
 </script>
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -59,28 +66,26 @@
     <!-- Edit, Delete -->
     {#each transactions as transaction (transaction._id)}
       <tr>
-        <td class="px-6 py-3">
-          <img
-            class="w-10 h-10 rounded-full"
-            src="/src/lib/assets/BRGY.-BANGCU1D-150x150.png"
-            alt="baranggay banggcud logo"
-          />
-          {` ${transaction.user_data.first_name} ${transaction.user_data.last_name}`}
-          <b>{transaction.document_data.type}</b>
-        </td>
+        <th
+          scope="row"
+          class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+        >
+          <div class="pl-3">
+            <div class="text-base font-semibold">
+              {` ${transaction.user_data.first_name} ${transaction.user_data.last_name}`}
+            </div>
+            <div class="font-normal text-gray-500">
+              {transaction.document_data.type}
+            </div>
+          </div>
+        </th>
         <td class="px-6 py-3">
           {transaction.status}
-          <!-- <select bind:value={transaction.status}> -->
-          <!--   <option value="pending">Pending</option> -->
-          <!--   <option value="completed">Completed</option> -->
-          <!--   <option value="rejected">Rejected</option> -->
-          <!--   <option value="waiting for payment">Waiting for Payment</option> -->
-          <!--  Add more options as needed -->
-          <!-- </select> -->
         </td>
         <td class="px-6 py-3">{format_date(transaction.date)}</td>
-        <td class="px-6 py-3">
+        <td class="px-6 py-4 text-right">
           <a
+            on:click={toggleModal}
             href="#"
             class="font-medium pr-2 text-blue-600 dark:text-blue-500 hover:underline"
             >Edit</a
@@ -94,47 +99,32 @@
       </tr>
     {/each}
 
-    <tbody id="resident">
-      <tr class="bg-white border-b hover:bg-green-100">
-        <th
-          scope="row"
-          class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
-        >
-          <img
-            class="w-10 h-10 rounded-full"
-            src="/src/lib/assets/BRGY.-BANGCU1D-150x150.png"
-            alt="baranggay banggcud logo"
-          />
-          <div class="pl-3">
-            <div class="text-base font-semibold">First_Name Last_Name</div>
-            <div class="font-normal text-gray-500">Document</div>
-          </div>
-        </th>
-        <td class="px-6 py-4">
-          <div class="relative inline-flex">
-            <select
-              class="text-white bg-green-400 border hover:border-green-500 px-4 py-2 pr-8 rounded-3xl"
-            >
-              <option>Correct</option>
-              <option>Incorrect</option>
-            </select>
-          </div>
-        </td>
-        <td class="px-6 py-4"> Date Crap </td>
-        <td class="px-6 py-4 text-right">
-          <a
-            href="#"
-            class="font-medium pr-2 text-blue-600 dark:text-blue-500 hover:underline"
-            >Edit</a
-          >
-          <a
-            href="#"
-            class="font-medium text-red-600 dark:text-red-500 hover:underline"
-            >Delete</a
-          >
-        </td>
-      </tr>
-    </tbody>
   </table>
 </div>
 
+<!-- Edit Modal -->
+
+{#if showModal}
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+  >
+    <div class="bg-white p-8 rounded-lg">
+      <h2 class="text-2xl mb-4">Modal Content</h2>
+      <p>This is a simple modal.</p>
+      {#each transactions as transaction (transaction._id)}
+        <select bind:value={transaction.status}>
+          <option value="pending">Pending</option>
+          <option value="completed">Completed</option>
+          <option value="rejected">Rejected</option>
+          <option value="waiting for payment">Waiting for Payment</option>
+        </select>
+      {/each}
+      <button
+        class="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md"
+        on:click={toggleModal}
+      >
+        Close Modal
+      </button>
+    </div>
+  </div>
+{/if}
