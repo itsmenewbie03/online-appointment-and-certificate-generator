@@ -23,8 +23,6 @@
         }
       );
 
-      //Getting Unauthorized access 401 errors
-      //might need to make it that it is the admin looking O.O
       if (response.ok) {
         let json_response = await response.json();
         residents = json_response.data;

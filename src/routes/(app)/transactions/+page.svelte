@@ -1,3 +1,12 @@
+<script>
+  import { onMount } from "svelte";
+
+  let transactions = [];
+  
+  const format_date = new Date(String);
+
+</script>
+
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
       <thead class="text-xs text-gray-50 uppercase bg-green-400">
@@ -12,7 +21,29 @@
       </thead>
       <!-- Example tbody 
       Now do the integration magik  -->
-      
+
+      <!-- Profile Picture, First Name Last Name, Document -->
+      <!-- Dropdown with correct and incorrect -->
+      <!-- Date -->
+      <!-- Edit, Delete -->
+      {#each transactions as transaction (transaction._id)}
+      <tr>
+        <td class="px-6 py-3">
+          {`${transaction.picture} ${transaction.first_name} ${transaction.last_name}`}
+        </td>
+        <td class="px-6 py-3">
+          <select bind:value={transaction.status}>
+            <option value="pending">Pending</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+            <!-- Add more options as needed -->
+          </select>
+        </td>
+        <td class="px-6 py-3">{format_date(transaction.date)}</td>
+        <td class="px-6 py-3">Actions</td>
+      </tr>
+    {/each}
+    
       <tbody id="resident"> 
         <tr class="bg-white border-b hover:bg-green-100">
             <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
