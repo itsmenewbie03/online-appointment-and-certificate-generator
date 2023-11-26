@@ -1,8 +1,10 @@
 <script>
   import { onMount } from "svelte";
+  import { invalidateAll } from "$app/navigation";
   import toast, { Toaster } from "svelte-french-toast";
   let current_status;
   let target_id;
+  let delete_target_id;
 
   let transactions = [];
   onMount(async () => {
@@ -14,7 +16,7 @@
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
-        }
+        },
       );
 
       if (response.ok) {
@@ -24,7 +26,7 @@
         console.error(
           "Failed to fetch transaction data:",
           response.status,
-          response.statusText
+          response.statusText,
         );
       }
     } catch (error) {
@@ -52,9 +54,32 @@
     transactions = transactions.map((transaction) =>
       transaction._id === target_id
         ? { ...transaction, status: current_status }
-        : transaction
+        : transaction,
     );
     toggleModal();
+  };
+  const delete_status = async () => {
+    const endpoint =
+      "https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/transactions/delete";
+    const opts = {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+      body: JSON.stringify({
+        transaction_id: delete_target_id,
+      }),
+    };
+
+    const resp = await fetch(endpoint, opts).then((res) => res.json());
+    // TODO: make this display in the frontend pretty xD
+    console.log(`DELETE DIZZ: ${resp.message}`);
+    transactions = transactions.filter(
+      (transaction) => transaction._id !== delete_target_id,
+    );
+    // await invalidateAll();
+    hide_delete_modal();
   };
   const format_date = (dateString) => {
     const originalDate = new Date(dateString);
@@ -72,13 +97,15 @@
     toggleModal();
   };
 
-  const show_delete_modal = () => {
+  const show_delete_modal = (id) => {
+    console.log(`DELETE TARGET: ${id}`);
+    delete_target_id = id;
     showDeleteModal();
-  }
+  };
 
   const hide_delete_modal = () => {
     hideDeleteModal();
-  }
+  };
 
   //Edit Modal
   let showModal = false;
@@ -94,7 +121,7 @@
 
   const hideDeleteModal = () => {
     deleteModal = false;
-  }
+  };
 </script>
 
 <Toaster />
@@ -145,9 +172,9 @@
             >Edit</a
           >
           <a
-          on:click={() => {
-            show_delete_modal();
-          }}
+            on:click={() => {
+              show_delete_modal(transaction._id);
+            }}
             href="#"
             class="font-medium text-red-600 dark:text-red-500 hover:underline"
             >Delete</a
@@ -191,23 +218,23 @@
   >
     <div class="bg-white p-8 rounded-lg">
       <h2 class="text-2xl mb-4">Modal Content</h2>
-      <p>This is a simple modal for: {target_id}</p>
+      <p>This is a simple modal delete for: {delete_target_id}</p>
       <button
         class="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md"
         on:click={async () => {
-          await delete_Status();
+          await delete_status();
         }}
       >
         Confirm Delete
       </button>
       <button
-      class="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md"
-      on:click={() => {
-        hide_delete_modal();
-      }}
-    >
-      Cancel
-    </button>
+        class="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md"
+        on:click={() => {
+          hide_delete_modal();
+        }}
+      >
+        Cancel
+      </button>
     </div>
   </div>
 {/if}
