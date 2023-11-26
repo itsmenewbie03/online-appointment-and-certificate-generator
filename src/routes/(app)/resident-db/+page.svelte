@@ -37,6 +37,13 @@
       console.error("Error fetching resident data:", error.message);
     }
   });
+
+    //Edit Modal
+    let showModal = false;
+
+    function toggleModal() {
+      showModal = !showModal;
+    }
 </script>
 
 <div class="relative py-12 place-items-center">
@@ -97,7 +104,7 @@
           <th scope="col" class="px-6 py-3"> Period of Residency </th>
           <th scope="col" class="px-6 py-3"> Email </th>
           <th scope="col" class="px-6 py-3"> Phone Number </th>
-          <th scope="col" class="px-6 py-3">
+          <th scope="col" class="px-6 py-3 text-right">
             Actions
             <span class="sr-only">Edit</span>
           </th>
@@ -116,10 +123,66 @@
             <td class="px-6 py-3">{resident.period_of_residency}</td>
             <td class="px-6 py-3">{resident.email}</td>
             <td class="px-6 py-3">{resident.phone_number}</td>
-            <td class="px-6 py-3">Actions</td>
+            <td class="px-6 py-4 text-right">
+              <a
+                on:click={toggleModal}
+                href="#"
+                class="font-medium pr-2 text-blue-600 dark:text-blue-500 hover:underline"
+                >Edit</a
+              >
+              <a
+                href="#"
+                class="font-medium text-red-600 dark:text-red-500 hover:underline"
+                >Delete</a
+              >
+            </td>
           </tr>
         {/each}
       </tbody>
     </table>
   </div>
 </div>
+
+<!-- Edit Modal -->
+
+<!-- Edit Modal -->
+{#if showModal}
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white p-8 rounded-lg">
+      <h2 class="text-2xl mb-4">Edit Resident</h2>
+      <form>
+        <!-- <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" bind:value={Resident.first_name} />
+
+        <label for="middleName">Middle Name:</label>
+        <input type="text" id="middleName" bind:value={editedResident.middle_name} />
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" bind:value={editedResident.last_name} />
+
+        <label for="dateOfBirth">Date of Birth:</label>
+        <input type="date" id="dateOfBirth" bind:value={editedResident.date_of_birth} />
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" bind:value={editedResident.address} />
+
+        <label for="periodOfResidency">Period of Residency:</label>
+        <input type="text" id="periodOfResidency" bind:value={editedResident.period_of_residency} />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" bind:value={editedResident.email} />
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" bind:value={editedResident.phone_number} /> -->
+
+        <button class="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md" on:click={toggleModal}>
+          Save Changes
+        </button>
+        <button class="bg-red-500 text-white px-4 py-2 mt-4 rounded-md" on:click={toggleModal}>
+          Cancel
+        </button>
+      </form>
+    </div>
+  </div>
+{/if}
+

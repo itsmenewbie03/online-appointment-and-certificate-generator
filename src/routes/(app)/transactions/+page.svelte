@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import toast, { Toaster } from "svelte-french-toast";
   let current_status;
   let target_id;
 
@@ -71,13 +72,32 @@
     toggleModal();
   };
 
+  const show_delete_modal = () => {
+    showDeleteModal();
+  }
+
+  const hide_delete_modal = () => {
+    hideDeleteModal();
+  }
+
   //Edit Modal
   let showModal = false;
+  let deleteModal = false;
 
   function toggleModal() {
     showModal = !showModal;
   }
+
+  const showDeleteModal = () => {
+    deleteModal = !deleteModal;
+  };
+
+  const hideDeleteModal = () => {
+    deleteModal = false;
+  }
 </script>
+
+<Toaster />
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
   <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -125,6 +145,9 @@
             >Edit</a
           >
           <a
+          on:click={() => {
+            show_delete_modal();
+          }}
             href="#"
             class="font-medium text-red-600 dark:text-red-500 hover:underline"
             >Delete</a
@@ -158,6 +181,33 @@
       >
         Update Status
       </button>
+    </div>
+  </div>
+{/if}
+
+{#if deleteModal}
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+  >
+    <div class="bg-white p-8 rounded-lg">
+      <h2 class="text-2xl mb-4">Modal Content</h2>
+      <p>This is a simple modal for: {target_id}</p>
+      <button
+        class="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md"
+        on:click={async () => {
+          await delete_Status();
+        }}
+      >
+        Confirm Delete
+      </button>
+      <button
+      class="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md"
+      on:click={() => {
+        hide_delete_modal();
+      }}
+    >
+      Cancel
+    </button>
     </div>
   </div>
 {/if}
