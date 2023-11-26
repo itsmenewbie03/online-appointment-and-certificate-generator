@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-
+  import { goto } from "$app/navigation";
   let residents = [];
   const format_date = (dateString) => {
     const originalDate = new Date(dateString);
@@ -20,7 +20,7 @@
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
-        }
+        },
       );
 
       if (response.ok) {
@@ -30,20 +30,24 @@
         console.error(
           "Failed to fetch resident data:",
           response.status,
-          response.statusText
+          response.statusText,
         );
       }
     } catch (error) {
       console.error("Error fetching resident data:", error.message);
     }
   });
+  const edit_resident = (id) => {
+    console.log(`EDIT RESIDENT DIZZ: ${id}`);
+    goto(`/create/${id}`);
+  };
 
-    //Edit Modal
-    let showModal = false;
+  //Edit Modal
+  let showModal = false;
 
-    function toggleModal() {
-      showModal = !showModal;
-    }
+  function toggleModal() {
+    showModal = !showModal;
+  }
 </script>
 
 <div class="relative py-12 place-items-center">
@@ -125,7 +129,9 @@
             <td class="px-6 py-3">{resident.phone_number}</td>
             <td class="px-6 py-4 text-right">
               <a
-                on:click={toggleModal}
+                on:click={() => {
+                  edit_resident(resident._id);
+                }}
                 href="#"
                 class="font-medium pr-2 text-blue-600 dark:text-blue-500 hover:underline"
                 >Edit</a
@@ -147,7 +153,9 @@
 
 <!-- Edit Modal -->
 {#if showModal}
-  <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+  >
     <div class="bg-white p-8 rounded-lg">
       <h2 class="text-2xl mb-4">Edit Resident</h2>
       <form>
@@ -175,14 +183,19 @@
         <label for="phoneNumber">Phone Number:</label>
         <input type="tel" id="phoneNumber" bind:value={editedResident.phone_number} /> -->
 
-        <button class="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md" on:click={toggleModal}>
+        <button
+          class="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md"
+          on:click={toggleModal}
+        >
           Save Changes
         </button>
-        <button class="bg-red-500 text-white px-4 py-2 mt-4 rounded-md" on:click={toggleModal}>
+        <button
+          class="bg-red-500 text-white px-4 py-2 mt-4 rounded-md"
+          on:click={toggleModal}
+        >
           Cancel
         </button>
       </form>
     </div>
   </div>
 {/if}
-
