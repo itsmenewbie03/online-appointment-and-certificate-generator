@@ -1,40 +1,40 @@
 <script>
-    import { onMount } from "svelte";
+    import { onMount } from 'svelte'
 
     /** @type {import('./$types').PageData} */
-    export let data;
+    export let data
     // INFO: this contains the current info of the resident
-    let resident_data = {};
+    let resident_data = {}
     // INFO: let us set the target_id to the resident_id param
-    let target_id = data.resident_id;
+    let target_id = data.resident_id
 
     // NOTE: we use `resident_id` to pull the resident info
 
     const get_resident_info = async (id) => {
-        console.log(`TRYING TO GET INFO FOR: ${id}`);
+        console.log(`TRYING TO GET INFO FOR: ${id}`)
         const endpoint =
-            "https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/data/resident/find";
+            'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/data/resident/find'
         const opts = {
-            method: "POST",
+            method: 'POST',
             headers: {
-                "content-type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+                'content-type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('access_token')}`,
             },
             body: JSON.stringify({
                 resident_id: id,
             }),
-        };
-        const resp = await fetch(endpoint, opts).then((res) => res.json());
-        console.log(`WE GOT: ${JSON.stringify(resp)}`);
-        return resp;
-    };
+        }
+        const resp = await fetch(endpoint, opts).then((res) => res.json())
+        console.log(`WE GOT: ${JSON.stringify(resp)}`)
+        return resp
+    }
     onMount(async () => {
-        const _resident_data = await get_resident_info(data.resident_id);
-        resident_data = _resident_data.data;
+        const _resident_data = await get_resident_info(data.resident_id)
+        resident_data = _resident_data.data
         resident_data.date_of_birth = resident_data.date_of_birth
-            .split("T")
-            .shift();
-    });
+            .split('T')
+            .shift()
+    })
 
     //Help me salvs QwQ
     //idk what i did wrong T-T
@@ -42,40 +42,40 @@
 
     const update_resident_info = async () => {
         const endpoint =
-            "https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/data/resident/update";
+            'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/data/resident/update'
         const opts = {
-            method: "PATCH",
+            method: 'PATCH',
             headers: {
-                "content-type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+                'content-type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('access_token')}`,
             },
             // INFO: based on the postman the params are `resident_id` and `update` the update prop should contain the updated info
             body: JSON.stringify({
                 resident_id: target_id,
                 update: resident_data,
             }),
-        };
+        }
         try {
-            const resp = await fetch(endpoint, opts);
+            const resp = await fetch(endpoint, opts)
 
             if (!resp.ok) {
                 throw new Error(
                     `Failed to update resident info: ${resp.statusText}`,
-                );
+                )
             }
 
-            const data = await resp.json();
-            console.log(`Update successful: ${JSON.stringify(data)}`);
-            return data;
+            const data = await resp.json()
+            console.log(`Update successful: ${JSON.stringify(data)}`)
+            return data
         } catch (error) {
-            console.error("Error updating resident info:", error.message);
+            console.error('Error updating resident info:', error.message)
         }
-    };
+    }
 </script>
 
 <h1>
-    HEloow DIZZ {resident_data.first_name ?? "Loading..."}
-    {resident_data.last_name ?? "Loading..."}
+    HEloow DIZZ {resident_data.first_name ?? 'Loading...'}
+    {resident_data.last_name ?? 'Loading...'}
 </h1>
 
 <div>
@@ -130,7 +130,7 @@
         <button
             class="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md"
             on:click={async () => {
-                await update_resident_info();
+                await update_resident_info()
             }}
         >
             Save Changes

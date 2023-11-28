@@ -1,28 +1,28 @@
 <script>
-    let email;
-    let password;
-    import toast, { Toaster } from "svelte-french-toast";
+    let email
+    let password
+    import toast, { Toaster } from 'svelte-french-toast'
     const handle_submit = async (event) => {
-        event.preventDefault();
+        event.preventDefault()
         // change url to actual api url
         const url =
-            "https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/auth/admin/login";
-        console.log(`logging in with ${email}:${password}`);
+            'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/auth/admin/login'
+        console.log(`logging in with ${email}:${password}`)
         // do the http request
         const resp = await fetch(url, {
-            method: "POST",
+            method: 'POST',
             headers: {
-                "content-type": "application/json",
+                'content-type': 'application/json',
             },
             body: JSON.stringify({
                 email: email,
                 password: password,
             }),
         }).then(async (res) => {
-            return { status: res.status, body: await res.json() };
-        });
-        const { status, body } = resp;
-        const _alert = status == 200 ? toast.success : toast.error;
+            return { status: res.status, body: await res.json() }
+        })
+        const { status, body } = resp
+        const _alert = status == 200 ? toast.success : toast.error
         // we could add a bit of client side encryption here using AES, so even if someone peeks at the token they can't read it
         // i'll leave the implementation to you,
 
@@ -31,12 +31,12 @@
              * i'm having issues with localStorage being undefined
              * I'll leave the implementation with you
              */
-            const { access_token, refresh_token } = body;
+            const { access_token, refresh_token } = body
             // you need to find way to store this persistently as this is the key to make authenticated request
         }
-        _alert(body.message);
+        _alert(body.message)
         // now you can use the response
-    };
+    }
 </script>
 
 <Toaster />
@@ -102,20 +102,30 @@
             </div>
 
             <div class="flex items-center">
-                  <div class="flex items-center h-5">
-                    <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 " required="">
-                  </div>
-                  <div class="ml-3 text-sm">
-                    <label for="terms" class="font-light text-gray-500 ">I accept the <a class="font-medium text-primary-600 hover:underline " href="#">Terms and Conditions</a></label>
-                  </div>
+                <div class="flex items-center h-5">
+                    <input
+                        id="terms"
+                        aria-describedby="terms"
+                        type="checkbox"
+                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300"
+                        required=""
+                    />
+                </div>
+                <div class="ml-3 text-sm">
+                    <label for="terms" class="font-light text-gray-500"
+                        >I accept the <a
+                            class="font-medium text-primary-600 hover:underline"
+                            href="#">Terms and Conditions</a
+                        ></label
+                    >
+                </div>
             </div>
-            
+
             <button
                 type="submit"
                 class="text-white bg-green-400 hover:bg-green-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-green-400 dark:hover:bg-green-500 dark:focus:ring-green-600"
                 >Submit</button
             >
-
         </form>
     </div>
 </div>

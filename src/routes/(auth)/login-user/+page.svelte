@@ -1,69 +1,69 @@
 <script>
-    import { onMount } from "svelte";
-    import toast, { Toaster } from "svelte-french-toast";
-    import { goto } from "$app/navigation";
+    import { onMount } from 'svelte'
+    import toast, { Toaster } from 'svelte-french-toast'
+    import { goto } from '$app/navigation'
 
-    let email;
-    let password;
-    let recaptcha_token;
+    let email
+    let password
+    let recaptcha_token
 
     const handle_submit = async (event) => {
-        event.preventDefault();
+        event.preventDefault()
 
         const url =
-            "https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/auth/user/login";
+            'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/auth/user/login'
         // Add the reCAPTCHA token to the form data
         const formData = {
             email: email,
             password: password,
             recaptcha_token: recaptcha_token,
-        };
+        }
 
         // do the http request
         const resp = await fetch(url, {
-            method: "POST",
+            method: 'POST',
             headers: {
-                "content-type": "application/json",
+                'content-type': 'application/json',
             },
             body: JSON.stringify(formData),
         }).then(async (res) => {
-            return { status: res.status, body: await res.json() };
-        });
+            return { status: res.status, body: await res.json() }
+        })
 
-        const { status, body } = resp;
-        const _alert = status == 200 ? toast.success : toast.error;
+        const { status, body } = resp
+        const _alert = status == 200 ? toast.success : toast.error
 
         if (status == 200) {
             // Rest of your code for handling a successful login
-            const { access_token, refresh_token } = body;
-            localStorage.setItem("access_token", access_token);
-            localStorage.setItem("refresh_token", refresh_token);
+            const { access_token, refresh_token } = body
+            localStorage.setItem('access_token', access_token)
+            localStorage.setItem('refresh_token', refresh_token)
             const t_id = toast.loading(
-                "Login success.\nYou are being redirected to the dashboard...",
-            );
+                'Login success.\nYou are being redirected to the dashboard...',
+            )
             setTimeout(() => {
-                goto("/");
-                toast.dismiss(t_id);
-            }, 1000);
+                goto('/')
+                toast.dismiss(t_id)
+            }, 1000)
         } else {
             // Handle login failure
-            _alert(body.message);
+            _alert(body.message)
         }
-    };
+    }
 
     onMount(() => {
         grecaptcha.ready(() => {
             grecaptcha
-                .execute("6LfKkAgpAAAAAFvfZUAebaKXbqgjDX9a7-Xu6KSN", {
-                    action: "submit",
+                .execute('6LfKkAgpAAAAAFvfZUAebaKXbqgjDX9a7-Xu6KSN', {
+                    action: 'submit',
                 })
                 .then((token) => {
                     // NOTE: we should have something to block the user from trying to login unless the token is ready
-                    console.log("reCAPTCHA Token:", token);
-                    recaptcha_token = token;
-                });
-        });
-    });
+                    console.log('reCAPTCHA Token:', token)
+                    recaptcha_token = token
+                })
+        })
+    })
 </script>
 
 <svelte:head>
