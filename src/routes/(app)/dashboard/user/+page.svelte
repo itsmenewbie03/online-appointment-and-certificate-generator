@@ -50,18 +50,19 @@
             }
             toast.success(`${body.message}\n${body.role}\n${body.email}`)
             loaded = true
-            goto(`/dashboard/${body.role}`)
             return
         }
         const access_token = localStorage.getItem('access_token')
         const refresh_token = localStorage.getItem('refresh_token')
         if (!access_token) {
             if (!refresh_token) {
-                toast.error('Please login first! xD')
+                let err_toast_id = toast.error('Please login first!')
                 // add a bit of delay
                 setTimeout(() => {
+                    toast.remove(err_toast_id)
                     goto('/login')
                 }, 1000)
+
                 return
             }
             const { status, body } = await get_new_access_token(refresh_token)
@@ -114,10 +115,8 @@
         }
         loaded = true
         toast.success(`${body.message}\n${body.role}\n${body.email}`)
-        goto(`/dashboard/${body.role}`)
     })
 </script>
 
-<!-- NOTE: please create some good looking loading stuff here xD  -->
 <Toaster />
-<h1>WILL REDIRECT YOU PLEASE WAIT...</h1>
+<h1>USER DIZZ NUTS DASHBOARD</h1>
