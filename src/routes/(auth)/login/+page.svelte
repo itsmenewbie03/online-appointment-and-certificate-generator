@@ -148,6 +148,7 @@
 
             <button
                 type="submit"
+                disabled={recaptcha_token ? null : 'disabled'}
                 class="text-white bg-green-400 hover:bg-green-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-green-400 dark:hover:bg-green-500 dark:focus:ring-green-600"
                 >Login</button
             >

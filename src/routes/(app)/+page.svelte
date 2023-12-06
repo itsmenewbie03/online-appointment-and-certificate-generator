@@ -57,9 +57,10 @@
         const refresh_token = localStorage.getItem('refresh_token')
         if (!access_token) {
             if (!refresh_token) {
-                toast.error('Please login first! xD')
+                let t_id = toast.error('Please login first! xD')
                 // add a bit of delay
                 setTimeout(() => {
+                    toast.remove(t_id)
                     goto('/login')
                 }, 1000)
                 return
