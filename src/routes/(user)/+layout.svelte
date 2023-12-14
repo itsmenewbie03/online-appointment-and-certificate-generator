@@ -26,6 +26,7 @@
                 <img src="/src/lib/assets/BRGY.-BANGCU1D-150x150.png" alt="" />
             </svg>
         </button>
+        
         <div class="ml-auto">
             <a href="profile">
                 <button
@@ -65,92 +66,35 @@
             </li>
             <li>
                 <a
-                    href="/"
+                    href="/create-appointment"
                     class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-green-300 dark:hover:bg-gray-700 group"
                 >
-                    <span class="ml-3">Home</span>
-                </a>
-            </li>
-            <li>
-                <button
-                    type="button"
-                    class="flex items-center w-full p-2 text-base text-gray-600 transition duration-75 rounded-lg group hover:bg-green-300 dark:text-white dark:hover:bg-gray-700"
-                    aria-controls="dropdown-example"
-                    data-collapse-toggle="dropdown-example"
-                    on:click={toggleDropdown}
-                >
-                    <span class="flex-1 ml-3 text-left whitespace-nowrap"
-                        >Documents</span
-                    >
-                    <svg
-                        class="w-3 h-3"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 10 6"
-                    >
-                        <path
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="m1 1 4 4 4-4"
-                        />
-                    </svg>
-                </button>
-                {#if isDropdownVisible}
-                    <ul id="dropdown-example" class="py-2 space-y-2">
-                        <li>
-                            <a
-                                href="/documents"
-                                class="flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-11 group hover:bg-green-300 dark:text-white dark:hover:bg-gray-700"
-                                >Document 1</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                href="/documents"
-                                class="flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-11 group hover:bg-green-300 dark:text-white dark:hover:bg-gray-700"
-                                >Document 2</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                href="/create-document"
-                                class="flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-11 group hover:bg-green-300 dark:text-white dark:hover:bg-gray-700"
-                                >Create a document</a
-                            >
-                        </li>
-                    </ul>
-                {/if}
-            </li>
-            <li>
-                <a
-                    href="/transactions"
-                    class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-green-300 dark:hover:bg-gray-700 group"
-                >
-                    <span class="flex-1 ml-3 whitespace-nowrap"
-                        >Transactions</span
-                    >
+                    <span class="ml-3">Create Appointment</span>
                 </a>
             </li>
             <li>
                 <a
-                    href="/concerns"
+                    href="/follow-up"
                     class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-green-300 dark:hover:bg-gray-700 group"
                 >
-                    <span class="flex-1 ml-3 whitespace-nowrap"
-                        >Follow up concern/s</span
-                    >
+                    <span class="ml-3">Follow Up</span>
                 </a>
             </li>
             <li>
                 <a
-                    href="/resident-db"
+                    href="/status"
+                    class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-green-300 dark:hover:bg-gray-700 group"
+                >
+                    <span class="ml-3">Status</span>
+                </a>
+            </li>
+            <li>
+                <a
+                    href="/transaction"
                     class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-green-300 dark:hover:bg-gray-700 group"
                 >
                     <span class="flex-1 ml-3 whitespace-nowrap"
-                        >Resident database</span
+                        >Transaction</span
                     >
                 </a>
             </li>
