@@ -1,8 +1,10 @@
-<script lang="ts">
-    import Radio from '/home/andrew/Documents/CommandCenter/js/online-appointment-and-certificate-generator/src/lib/Radio.svelte'
+<script>
+    import Radio from '$components/Radio.svelte'
+    import toast, { Toaster } from 'svelte-french-toast'
 
     let document_type
     let file
+
     const options = [
         {
             value: 'paid',
@@ -35,7 +37,7 @@
 
     const handleSubmit = async () => {
         if (!file) {
-            console.error('Please select a file.')
+            toast.error('Please select a file.')
             return
         }
 
@@ -47,7 +49,7 @@
             const base64Data = reader.result?.toString().split(',')[1]
 
             if (!base64Data) {
-                console.error('Failed to read the file.')
+                toast.error('Failed to read the file.')
                 return
             }
 
@@ -59,31 +61,37 @@
             }
 
             try {
-                const response = await fetch(
-                    'http://localhost:3000/api/documents/create',
+                const resp = await fetch(
+                    'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/documents/create',
                     {
                         method: 'POST',
+
                         headers: {
-                            'Content-Type': 'application/json',
+                            'content-type': 'application/json',
+                            Authorization: `Bearer ${localStorage.getItem(
+                                'access_token',
+                            )}`,
                         },
                         body: JSON.stringify(formData),
                     },
-                )
+                ).then(async (res) => {
+                    return {
+                        status: res.status,
+                        body: await res.json(),
+                    }
+                })
 
-                if (response.ok) {
-                    const result = await response.json()
-                    console.log('File uploaded successfully:', result)
-                } else {
-                    console.error('File upload failed')
-                }
+                const _alert = resp.status == 200 ? toast.success : toast.error
+                _alert(resp.body.message)
             } catch (error) {
-                console.error('Error uploading file:', error)
+                toast.error(`Error uploading file: ${error}`)
             }
         }
     }
 </script>
 
 <main>
+    <Toaster />
     <div class="grid place-items-center">
         <div
             class=" max-w-sm py-[60px] w-2/3 px-12 bg-white border border-gray-200 rounded-lg shadow"
@@ -110,28 +118,29 @@
                     type="text"
                     bind:value={document_name}
                     id="description"
+                    required
                 />
                 <div class="flex justify-between mt-5">
-                <div>
-                    <label>First Name</label>
-                    <input
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                        type="checkbox"
-                        value="first_name"
-                        on:change={handleCheckboxChange}
-                    />
+                    <div>
+                        <label>First Name</label>
+                        <input
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            type="checkbox"
+                            value="first_name"
+                            on:change={handleCheckboxChange}
+                        />
+                    </div>
+                    <div>
+                        <label>Last Name</label>
+                        <input
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            type="checkbox"
+                            value="last_name"
+                            on:change={handleCheckboxChange}
+                        />
+                    </div>
                 </div>
-                <div>
-                    <label>Last Name</label>
-                    <input
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                        type="checkbox"
-                        value="last_name"
-                        on:change={handleCheckboxChange}
-                    />
-                </div>
-            </div>
-                <!-- Add more checkboxes as needed -->
+                <!--PLEASE DO Add more checkboxes coz it's needed -->
 
                 <button
                     class="focus:outline-none text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
