@@ -2,6 +2,7 @@
     let email
     let password
     let first_name
+    let middle_name
     let last_name
     let gender
     let date_of_birth
@@ -61,6 +62,7 @@
             <div class="grid grid-cols-2 gap-6">
                 <div class="relative z-0 w-full mb-6 group">
                     <input
+                    required
                         bind:value={email}
                         type="email"
                         name="floating_email"
@@ -76,6 +78,7 @@
                 </div>
                 <div class="relative z-0 w-full mb-6 group">
                     <input
+                    required
                         bind:value={first_name}
                         type="email"
                         name="floating_email"
@@ -91,6 +94,22 @@
                 </div>
                 <div class="relative z-0 w-full mb-6 group">
                     <input
+                        bind:value={middle_name}
+                        type="email"
+                        name="floating_email"
+                        id="floating_email"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                        placeholder=" "
+                    />
+                    <label
+                        for="floating_email"
+                        class="peer-focus:font-medium absolute text-sm text-gray-950 dark:text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                        >Middle name</label
+                    >
+                </div>
+                <div class="relative z-0 w-full mb-6 group">
+                    <input
+                    required
                         bind:value={last_name}
                         type="email"
                         name="floating_email"
@@ -106,6 +125,7 @@
                 </div>
                 <div class="relative z-0 w-full mb-6 group">
                     <input
+                    required
                         bind:value={gender}
                         type="email"
                         name="floating_email"
@@ -121,6 +141,7 @@
                 </div>
                 <div class="relative z-0 w-full mb-6 group">
                     <input
+                    required
                         bind:value={date_of_birth}
                         type="email"
                         name="floating_email"
@@ -136,6 +157,7 @@
                 </div>
                 <div class="relative z-0 w-full mb-6 group">
                     <input
+                    required
                         bind:value={address}
                         type="email"
                         name="floating_email"
@@ -151,6 +173,7 @@
                 </div>
                 <div class="relative z-0 w-full mb-6 group">
                     <input
+                    required
                         bind:value={period_of_residency}
                         type="email"
                         name="floating_email"
@@ -166,6 +189,7 @@
                 </div>
                 <div class="relative z-0 w-full mb-6 group">
                     <input
+                    required
                         bind:value={phone_number}
                         type="email"
                         name="floating_email"
@@ -181,6 +205,7 @@
                 </div>
                 <div class="relative z-0 group">
                     <input
+                    required
                         bind:value={password}
                         type="password"
                         name="floating_password"
@@ -196,6 +221,7 @@
                 </div>
                 <div class="relative z-0 group">
                     <input
+                    required
                         bind:value={password}
                         type="password"
                         name="confirm_password"

@@ -120,26 +120,100 @@
                     id="description"
                     required
                 />
-                <div class="flex justify-between mt-5">
+                <div class="grid grid-cols-2 gap-4 mt-4">
+                    <!-- Example of a single checkbox styled using Tailwind -->
                     <div>
-                        <label>First Name</label>
-                        <input
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                            type="checkbox"
-                            value="first_name"
-                            on:change={handleCheckboxChange}
-                        />
+                        <label class="flex items-center">
+                            <input
+                                class="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:border-gray-600"
+                                type="checkbox"
+                                value="first_name"
+                                on:change={handleCheckboxChange}
+                            />
+                            <span class="ml-2">First Name</span>
+                        </label>
                     </div>
                     <div>
-                        <label>Last Name</label>
-                        <input
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                            type="checkbox"
-                            value="last_name"
-                            on:change={handleCheckboxChange}
-                        />
+                        <label class="flex items-center">
+                            <input
+                                class="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:border-gray-600"
+                                type="checkbox"
+                                value="middle_name"
+                                on:change={handleCheckboxChange}
+                            />
+                            <span class="ml-2">Middle Name</span>
+                        </label>
                     </div>
+                    <!-- Repeated structure for other checkboxes -->
+                    <div>
+                        <label class="flex items-center">
+                            <input
+                                class="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:border-gray-600"
+                                type="checkbox"
+                                value="last_name"
+                                on:change={handleCheckboxChange}
+                            />
+                            <span class="ml-2">Last Name</span>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="flex items-center">
+                            <input
+                                class="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:border-gray-600"
+                                type="checkbox"
+                                value="gender"
+                                on:change={handleCheckboxChange}
+                            />
+                            <span class="ml-2">Gender</span>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="flex items-center">
+                            <input
+                                class="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:border-gray-600"
+                                type="checkbox"
+                                value="date_of_birth"
+                                on:change={handleCheckboxChange}
+                            />
+                            <span class="ml-2">Date of Birth</span>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="flex items-center">
+                            <input
+                                class="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:border-gray-600"
+                                type="checkbox"
+                                value="address"
+                                on:change={handleCheckboxChange}
+                            />
+                            <span class="ml-2">Address</span>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="flex items-center">
+                            <input
+                                class="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:border-gray-600"
+                                type="checkbox"
+                                value="period_of_residency"
+                                on:change={handleCheckboxChange}
+                            />
+                            <span class="ml-2">Period of Residency</span>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="flex items-center">
+                            <input
+                                class="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:border-gray-600"
+                                type="checkbox"
+                                value="phone_number"
+                                on:change={handleCheckboxChange}
+                            />
+                            <span class="ml-2">Phone Number</span>
+                        </label>
+                    </div>
+                    <!-- Additional checkboxes can be added similarly -->
                 </div>
+
                 <!--PLEASE DO Add more checkboxes coz it's needed -->
 
                 <button
