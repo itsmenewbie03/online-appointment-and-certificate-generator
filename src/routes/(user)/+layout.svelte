@@ -25,28 +25,6 @@
 </script>
 
 <nav class="bg-green-500 border-green-500 dark:bg-gray-900">
-    <div class="flex items-center justify-between py-4 px-6 bg-gray-200">
-        <div class="flex items-center space-x-4">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-          </svg>
-          {#if notification.unread}
-            <div class="relative">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <circle cx="18" cy="6" r="3" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10.5V12a3 3 0 01-3 3H9.5m9.5-6v6m0 0v6m0-6h6m-6 0H12a3 3 0 00-3 3v1.5"/>
-              </svg>
-              <span class="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full"></span>
-            </div>
-          {/if}
-        </div>
-        <button
-          on:click={markAsRead}
-          class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition duration-300 ease-in-out"
-          disabled={!notification.unread}
-        >
-          Mark as Read
-        </button>
     <div class="flex items-center justify-between mx-auto p-4">
         <button
             data-drawer-target="sidebar-multi-level-sidebar"
@@ -66,7 +44,6 @@
                 <img src="/src/lib/assets/BRGY.-BANGCU1D-150x150.png" alt="" />
             </svg>
         </button>
-        
         <div class="ml-auto">
             <a href="profile">
                 <button
@@ -125,7 +102,7 @@
                     href="/status"
                     class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-green-300 dark:hover:bg-gray-700 group"
                 >
-                    <span class="ml-3">Status</span>
+                    <span class="ml-3">Notification</span>
                 </a>
             </li>
             <li>

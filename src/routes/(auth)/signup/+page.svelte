@@ -1,6 +1,13 @@
 <script>
     let email
     let password
+    let first_name
+    let last_name
+    let gender
+    let date_of_birth
+    let address
+    let period_of_residency
+    let phone_number
     import toast, { Toaster } from 'svelte-french-toast'
     const handle_submit = async (event) => {
         event.preventDefault()
@@ -50,76 +57,162 @@
             <div class="grid mb-8 place-items-center">
                 <img src="/src/lib/assets/BRGY.-BANGCU1D-150x150.png" alt="" />
             </div>
-            <div class="relative z-0 w-full mb-6 group">
-                <input
-                    bind:value={email}
-                    type="email"
-                    name="floating_email"
-                    id="floating_email"
-                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
-                    placeholder=" "
-                />
-                <label
-                    for="floating_email"
-                    class="peer-focus:font-medium absolute text-sm text-gray-950 dark:text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                    >Email address</label
-                >
-            </div>
-            <div class="relative z-0 w-full mb-6 group">
-                <input
-                    bind:value={password}
-                    type="password"
-                    name="floating_password"
-                    id="floating_password"
-                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
-                    placeholder=" "
-                />
-                <label
-                    for="floating_password"
-                    class="peer-focus:font-medium absolute text-sm text-gray-950 dark:text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                    >Password</label
-                >
-            </div>
 
-            <div class="relative z-0 w-full mb-6 group">
-                <input
-                    bind:value={password}
-                    type="password"
-                    name="floating_password"
-                    id="floating_password"
-                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
-                    placeholder=" "
-                />
-                <label
-                    for="floating_password"
-                    class="peer-focus:font-medium absolute text-sm text-gray-950 dark:text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                    >Confirm Password</label
-                >
-            </div>
-
-            <div class="flex items-center">
-                <div class="flex items-center h-5">
+            <div class="grid grid-cols-2 gap-6">
+                <div class="relative z-0 w-full mb-6 group">
                     <input
-                        id="terms"
-                        aria-describedby="terms"
-                        type="checkbox"
-                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300"
-                        required=""
+                        bind:value={email}
+                        type="email"
+                        name="floating_email"
+                        id="floating_email"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                        placeholder=" "
                     />
+                    <label
+                        for="floating_email"
+                        class="peer-focus:font-medium absolute text-sm text-gray-950 dark:text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                        >Email address</label
+                    >
                 </div>
-                <div class="ml-3 text-sm">
-                    <label for="terms" class="font-light text-gray-500"
-                        >I accept the <a
-                            class="font-medium text-primary-600 hover:underline"
-                            href="#">Terms and Conditions</a
-                        ></label
+                <div class="relative z-0 w-full mb-6 group">
+                    <input
+                        bind:value={first_name}
+                        type="email"
+                        name="floating_email"
+                        id="floating_email"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                        placeholder=" "
+                    />
+                    <label
+                        for="floating_email"
+                        class="peer-focus:font-medium absolute text-sm text-gray-950 dark:text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                        >First name</label
+                    >
+                </div>
+                <div class="relative z-0 w-full mb-6 group">
+                    <input
+                        bind:value={last_name}
+                        type="email"
+                        name="floating_email"
+                        id="floating_email"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                        placeholder=" "
+                    />
+                    <label
+                        for="floating_email"
+                        class="peer-focus:font-medium absolute text-sm text-gray-950 dark:text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                        >Last name</label
+                    >
+                </div>
+                <div class="relative z-0 w-full mb-6 group">
+                    <input
+                        bind:value={gender}
+                        type="email"
+                        name="floating_email"
+                        id="floating_email"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                        placeholder=" "
+                    />
+                    <label
+                        for="floating_email"
+                        class="peer-focus:font-medium absolute text-sm text-gray-950 dark:text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                        >Gender</label
+                    >
+                </div>
+                <div class="relative z-0 w-full mb-6 group">
+                    <input
+                        bind:value={date_of_birth}
+                        type="email"
+                        name="floating_email"
+                        id="floating_email"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                        placeholder=" "
+                    />
+                    <label
+                        for="floating_email"
+                        class="peer-focus:font-medium absolute text-sm text-gray-950 dark:text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                        >Date of birth</label
+                    >
+                </div>
+                <div class="relative z-0 w-full mb-6 group">
+                    <input
+                        bind:value={address}
+                        type="email"
+                        name="floating_email"
+                        id="floating_email"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                        placeholder=" "
+                    />
+                    <label
+                        for="floating_email"
+                        class="peer-focus:font-medium absolute text-sm text-gray-950 dark:text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                        >Address</label
+                    >
+                </div>
+                <div class="relative z-0 w-full mb-6 group">
+                    <input
+                        bind:value={period_of_residency}
+                        type="email"
+                        name="floating_email"
+                        id="floating_email"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                        placeholder=" "
+                    />
+                    <label
+                        for="floating_email"
+                        class="peer-focus:font-medium absolute text-sm text-gray-950 dark:text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                        >Period of residency</label
+                    >
+                </div>
+                <div class="relative z-0 w-full mb-6 group">
+                    <input
+                        bind:value={phone_number}
+                        type="email"
+                        name="floating_email"
+                        id="floating_email"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                        placeholder=" "
+                    />
+                    <label
+                        for="floating_email"
+                        class="peer-focus:font-medium absolute text-sm text-gray-950 dark:text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                        >Phone number</label
+                    >
+                </div>
+                <div class="relative z-0 group">
+                    <input
+                        bind:value={password}
+                        type="password"
+                        name="floating_password"
+                        id="floating_password"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                        placeholder=" "
+                    />
+                    <label
+                        for="floating_password"
+                        class="peer-focus:font-medium absolute text-sm text-gray-950 dark:text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                        >Password</label
+                    >
+                </div>
+                <div class="relative z-0 group">
+                    <input
+                        bind:value={password}
+                        type="password"
+                        name="confirm_password"
+                        id="confirm_password"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                        placeholder=" "
+                    />
+                    <label
+                        for="confirm_password"
+                        class="peer-focus:font-medium absolute text-sm text-gray-950 dark:text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                        >Confirm Password</label
                     >
                 </div>
             </div>
-
             <button
                 type="submit"
-                class="text-white bg-green-400 hover:bg-green-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-green-400 dark:hover:bg-green-500 dark:focus:ring-green-600"
+                class="text-white mt-5 bg-green-400 hover:bg-green-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-green-400 dark:hover:bg-green-500 dark:focus:ring-green-600"
                 >Submit</button
             >
         </form>

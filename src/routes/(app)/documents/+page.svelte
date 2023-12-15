@@ -18,14 +18,6 @@
                 <td class="px-6 py-4 text-right">
                     <a
                         on:click={() => {
-                            show_edit_modal(document._id)
-                        }}
-                        href="#"
-                        class="font-medium pr-2 text-blue-600 dark:text-blue-500 hover:underline"
-                        >Edit</a
-                    >
-                    <a
-                        on:click={() => {
                             show_delete_modal(document)
                         }}
                         href="#"
