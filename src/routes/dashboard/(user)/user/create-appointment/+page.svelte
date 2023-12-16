@@ -38,59 +38,49 @@
     })
 </script>
 
-<div
-    class="grid place-items-center mt-10 py-[60px] px-12 bg-white border border-gray-200 rounded-lg shadow"
->
-    <div>
-        <form class="grid grid-cols-2 gap-6" on:submit={handle_submit}>
+<div class="max-w-xl mx-auto mt-10 px-4">
+    <div class="bg-white border border-gray-200 rounded-lg shadow-md">
+        <form class="p-4 md:p-6 space-y-4 md:space-y-6" on:submit={handle_submit}>
             <div>
-                <div>
-                    <select
-                        bind:value={document_id}
-                        id="dropdown1"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5"
-                        required
-                    >
-                        <option value="" disabled selected
-                            >Select document type...</option
-                        >
-                        {#each documents as document}
-                            <option value={document._id}>{document.type}</option
-                            >
-                            <!-- content here -->
-                        {/each}
-                        <!-- TODO: load document list from API -->
-                    </select>
-                </div>
+                <label for="dropdown1" class="block text-sm font-medium text-gray-700">Select document type</label>
+                <select
+                    bind:value={document_id}
+                    id="dropdown1"
+                    class="mt-1 block w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500 text-sm text-gray-900 border p-2.5"
+                    required
+                >
+                    <option value="" disabled selected>Select document type...</option>
+                    {#each documents as document}
+                        <option value={document._id}>{document.type}</option>
+                    {/each}
+                    <!-- TODO: load document list from API -->
+                </select>
             </div>
             <div>
-                <div>
-                    <!-- TODO: add style here pls -->
-                    <label for="date">DATE and TIME</label>
-                    <input
-                        type="datetime-local"
-                        name="date"
-                        bind:value={date}
-                        required
-                    />
-                </div>
+                <label for="date" class="block text-sm font-medium text-gray-700">Date and Time</label>
+                <input
+                    type="datetime-local"
+                    name="date"
+                    bind:value={date}
+                    class="mt-1 block w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500 text-sm text-gray-900 border p-2.5"
+                    required
+                />
             </div>
 
-            <!-- CALANDER STUFF (do we api or nah) -->
+            <!-- CALENDAR STUFF -->
 
-            <div class="col-span-2 flex justify-center">
+            <div class="flex flex-col md:flex-row md:justify-center md:space-x-4">
                 <button
                     type="button"
-                    class="text-white bg-green-400 hover:bg-green-500 focus:outline-none focus:ring-4 focus:ring-green-600 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-4"
-                    >Cancel</button
-                >
+                    class="text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-600 font-medium rounded-full text-sm px-5 py-2.5 text-center mt-2 md:mt-0"
+                >Cancel</button>
                 <button
                     id="create-account"
                     type="submit"
-                    class="text-white bg-green-400 hover:bg-green-500 focus:outline-none focus:ring-4 focus:ring-green-600 font-medium rounded-full text-sm px-5 py-2.5 text-center ml-4"
-                    >Create Appointment</button
-                >
+                    class="text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-600 font-medium rounded-full text-sm px-5 py-2.5 text-center mt-2 md:mt-0"
+                >Create Appointment</button>
             </div>
         </form>
     </div>
 </div>
+
