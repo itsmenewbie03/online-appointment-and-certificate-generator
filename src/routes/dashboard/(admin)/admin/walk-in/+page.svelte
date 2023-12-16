@@ -1,5 +1,9 @@
 <script>
-        let info = {};
+    let info = {}
+    const handle_submit = (event) => {
+        event.preventDefault()
+        console.log('WALKIN SUBMITTED')
+    }
 </script>
 
 <div
@@ -104,9 +108,8 @@
                         required
                     />
                 </div>
-
             </div>
-            
+
             <button
                 id="create-account"
                 type="submit"
@@ -116,3 +119,4 @@
         </form>
     </div>
 </div>
+
