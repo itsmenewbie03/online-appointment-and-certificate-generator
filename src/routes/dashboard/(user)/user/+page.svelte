@@ -119,4 +119,6 @@
 </script>
 
 <Toaster />
-<h1>USER DIZZ NUTS DASHBOARD</h1>
+<main>
+    <h1>USER DIZZ NUTS DASHBOARD</h1>
+</main>
