@@ -111,6 +111,7 @@
             loaded = true
             // update the access token in localStorage
             localStorage.setItem('access_token', body.access_token)
+            goto(`/dashboard/${body.role}`)
             return
         }
         loaded = true

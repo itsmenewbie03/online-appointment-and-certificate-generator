@@ -5,23 +5,23 @@
         isDropdownVisible = !isDropdownVisible
     }
 
-    import { onMount } from 'svelte';
-  
-  let notification = {
-    unread: true, // Initially, the message is unread
-  };
+    import { onMount } from 'svelte'
 
-  function markAsRead() {
-    notification.unread = false; // Mark the message as read
-  }
+    let notification = {
+        unread: true, // Initially, the message is unread
+    }
 
-  onMount(() => {
-    // Simulating an API call or some delay to receive the message
-    setTimeout(() => {
-      // Set notification to unread after some delay (simulating new message)
-      notification.unread = true;
-    }, 3000);
-  });
+    function markAsRead() {
+        notification.unread = false // Mark the message as read
+    }
+
+    onMount(() => {
+        // Simulating an API call or some delay to receive the message
+        setTimeout(() => {
+            // Set notification to unread after some delay (simulating new message)
+            notification.unread = true
+        }, 3000)
+    })
 </script>
 
 <nav class="bg-green-500 border-green-500 dark:bg-gray-900">

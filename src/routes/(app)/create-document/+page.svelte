@@ -4,6 +4,7 @@
 
     let document_type
     let file
+    let price
 
     const options = [
         {
@@ -58,6 +59,7 @@
                 required_data: required_data,
                 document_name: document_name,
                 document_type: document_type,
+                price: price,
             }
 
             try {
@@ -117,6 +119,16 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     type="text"
                     bind:value={document_name}
+                    id="description"
+                    required
+                />
+
+                <label for="description">Price</label>
+                <input
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    type="number"
+                    min="0"
+                    bind:value={price}
                     id="description"
                     required
                 />
