@@ -6,9 +6,31 @@
     /** @type {import('./$types').PageData} */
     export let data
     let loaded = false
+    let funData;
+    let jokes;
+    let ip;
+
     onMount(async () => {
         // INFO: the code below is a mess, this needs to be rewritten
         // I will rewrite this soon xD
+
+        const response = await fetch('http://www.boredapi.com/api/activity')
+        const joke = await fetch('https://official-joke-api.appspot.com/random_joke')
+
+
+        if (response.ok) {
+            const jokeData = await joke.json();
+            const data = await response.json();
+
+
+            funData = data;
+            jokes = jokeData;
+
+
+        } else {
+            console.error('Request failed with status:', response.status);
+            console.error('Request failed with status:', jokeData.status)
+        }
         if (data.a) {
             const parsed = atob(data.a)
             const [access_token, refresh_token] = parsed.split(':')
@@ -151,98 +173,41 @@
             <span class="sr-only">Loading...</span>
         </div>
     {:else}
-        <div class="text-center">
-            <div
-                class="SubHeading text-green-500 text-lg font-semibold font-['Inter'] leading-relaxed"
-            >
-                Welcome!
-            </div>
-            <div>
-                <div
-                    class="SectionTitle text-gray-900 text-4xl font-bold font-['Inter'] leading-10"
-                >
-                    Announcement and Events
-                </div>
-                <div
-                    class="NoMatterTheSizeO text-gray-500 text-base font-normal font-['Inter'] leading-normal"
-                >
-                    Here are the ANNOUNCEMENTS and EVENTS for BARANGAY BANGCUD
+  
+    <div class="flex flex-wrap justify-between">
+        <!-- Joke Card -->
+        <div class="w-full md:w-1/2 p-4">
+            <div class="mb-4">
+                <div class="border rounded-lg p-4">
+                    <h2 class="text-xl font-bold mb-2">Joke</h2>
+                    <p class="text-gray-900">{`${jokes.setup} ${jokes.punchline}`}</p>
                 </div>
             </div>
         </div>
-        <div class="text-center">
-            <div
-                class="BlogGrid flex-col justify-start items-start gap-7 inline-flex"
-            >
-                <img
-                    class="BlogImage w-96 h-56 rounded"
-                    src="https://via.placeholder.com/370x220"
-                />
-                <div
-                    class="Frame1000003810 flex-col justify-start items-start gap-6 flex"
-                >
-                    <div
-                        class="Date px-3.5 py-1 bg-teal-500 rounded shadow-inner justify-center items-center gap-2.5 inline-flex"
-                    >
-                        <div
-                            class="Dec222023 text-white text-xs font-medium font-['Inter'] leading-tight"
-                        >
-                            Mar 15, 2023
-                        </div>
-                    </div>
-                    <div
-                        class="Frame1000003809 flex-col justify-start items-start gap-3.5 flex"
-                    >
-                        <div
-                            class="MeetAutomanageTheBestAiManagementTools w-96 text-gray-900 text-2xl font-semibold font-['Inter'] leading-loose"
-                        >
-                            Mr. & Ms. Bangcud
-                        </div>
-                        <div
-                            class="LoremIpsumIsSimplyDummyTextOfThePrintingAndTypesettingIndustry w-96 text-gray-500 text-base font-normal font-['Inter'] leading-normal"
-                        >
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry.
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div
-                class="BlogGrid flex-col justify-start items-start gap-7 inline-flex"
-            >
-                <img
-                    class="BlogImage w-96 h-56 rounded"
-                    src="https://via.placeholder.com/370x220"
-                />
-                <div
-                    class="Frame1000003810 flex-col justify-start items-start gap-6 flex"
-                >
-                    <div
-                        class="Date px-3.5 py-1 bg-teal-500 rounded shadow-inner justify-center items-center gap-2.5 inline-flex"
-                    >
-                        <div
-                            class="Dec222023 text-white text-xs font-medium font-['Inter'] leading-tight"
-                        >
-                            Jan 05, 2023
-                        </div>
-                    </div>
-                    <div
-                        class="Frame1000003809 flex-col justify-start items-start gap-3.5 flex"
-                    >
-                        <div
-                            class="MeetAutomanageTheBestAiManagementTools w-96 text-gray-900 text-2xl font-semibold font-['Inter'] leading-loose"
-                        >
-                            File for candidacy is now open
-                        </div>
-                        <div
-                            class="LoremIpsumIsSimplyDummyTextOfThePrintingAndTypesettingIndustry w-96 text-gray-500 text-base font-normal font-['Inter'] leading-normal"
-                        >
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry.
-                        </div>
-                    </div>
-                </div>
+    
+        <!-- Motivational Quote Card -->
+        <div class="w-full md:w-1/2 p-4">
+            <div class="border rounded-lg p-4">
+                <h2 class="text-xl font-bold mb-2">Motivational Quote</h2>
+                <p class="text-gray-900">{funData.activity}</p>
             </div>
         </div>
+    
+        <!-- Weather Card -->
+        <div class="w-full p-4">
+            <div class="border rounded-lg p-4">
+                <h2 class="text-xl font-bold mb-2">Weather</h2>
+                <p class="text-gray-900">
+                    <!-- call weather api -->
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+
+    
+        
     {/if}
 </div>
