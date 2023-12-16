@@ -102,14 +102,14 @@
                     <ul id="dropdown-example" class="py-2 space-y-2">
                         <li>
                             <a
-                                href="/documents"
+                                href="/dashboard/admin/documents"
                                 class="flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-11 group hover:bg-green-300 dark:text-white dark:hover:bg-gray-700"
                                 >Documents</a
                             >
                         </li>
                         <li>
                             <a
-                                href="/create-document"
+                                href="/dashboard/admin/create-document"
                                 class="flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-11 group hover:bg-green-300 dark:text-white dark:hover:bg-gray-700"
                                 >Create a document</a
                             >
@@ -119,7 +119,7 @@
             </li>
             <li>
                 <a
-                    href="/transactions"
+                    href="/dashboard/admin/transactions"
                     class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-green-300 dark:hover:bg-gray-700 group"
                 >
                     <span class="flex-1 ml-3 whitespace-nowrap"
@@ -129,7 +129,7 @@
             </li>
             <li>
                 <a
-                    href="/concerns"
+                    href="/dashboard/admin/concerns"
                     class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-green-300 dark:hover:bg-gray-700 group"
                 >
                     <span class="flex-1 ml-3 whitespace-nowrap"
@@ -139,17 +139,15 @@
             </li>
             <li>
                 <a
-                    href="/walk-in"
+                    href="/dashboard/admin/walk-in"
                     class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-green-300 dark:hover:bg-gray-700 group"
                 >
-                    <span class="flex-1 ml-3 whitespace-nowrap"
-                        >Walk In</span
-                    >
+                    <span class="flex-1 ml-3 whitespace-nowrap">Walk In</span>
                 </a>
             </li>
             <li>
                 <a
-                    href="/resident-db"
+                    href="/dashboard/admin/resident-db"
                     class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-green-300 dark:hover:bg-gray-700 group"
                 >
                     <span class="flex-1 ml-3 whitespace-nowrap"

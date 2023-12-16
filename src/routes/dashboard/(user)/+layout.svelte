@@ -1,29 +1,3 @@
-<script>
-    let isDropdownVisible = false
-
-    function toggleDropdown() {
-        isDropdownVisible = !isDropdownVisible
-    }
-
-    import { onMount } from 'svelte'
-
-    let notification = {
-        unread: true, // Initially, the message is unread
-    }
-
-    function markAsRead() {
-        notification.unread = false // Mark the message as read
-    }
-
-    onMount(() => {
-        // Simulating an API call or some delay to receive the message
-        setTimeout(() => {
-            // Set notification to unread after some delay (simulating new message)
-            notification.unread = true
-        }, 3000)
-    })
-</script>
-
 <nav class="bg-green-500 border-green-500 dark:bg-gray-900">
     <div class="flex items-center justify-between mx-auto p-4">
         <button
@@ -83,7 +57,7 @@
             </li>
             <li>
                 <a
-                    href="/create-appointment"
+                    href="/dashboard/user/create-appointment"
                     class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-green-300 dark:hover:bg-gray-700 group"
                 >
                     <span class="ml-3">Create Appointment</span>
@@ -91,7 +65,7 @@
             </li>
             <li>
                 <a
-                    href="/follow-up"
+                    href="/dashboard/user/follow-up"
                     class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-green-300 dark:hover:bg-gray-700 group"
                 >
                     <span class="ml-3">Follow Up</span>
@@ -99,19 +73,19 @@
             </li>
             <li>
                 <a
-                    href="/status"
+                    href="/dashboard/user/notifications"
                     class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-green-300 dark:hover:bg-gray-700 group"
                 >
-                    <span class="ml-3">Notification</span>
+                    <span class="ml-3">Notifications</span>
                 </a>
             </li>
             <li>
                 <a
-                    href="/transaction"
+                    href="/dashboard/user/transactions"
                     class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-green-300 dark:hover:bg-gray-700 group"
                 >
                     <span class="flex-1 ml-3 whitespace-nowrap"
-                        >Transaction</span
+                        >Transactions</span
                     >
                 </a>
             </li>
