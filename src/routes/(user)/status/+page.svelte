@@ -2,9 +2,9 @@
   import { onMount } from 'svelte';
 
   let notifications = [
-    { id: 1, message: 'Notification 1', unread: true },
-    { id: 2, message: 'Notification 2', unread: false },
-    { id: 3, message: 'Notification 3', unread: true }
+    { id: 1, message: 'Notification 1', time: '00:00:00', unread: true },
+    { id: 2, message: 'Notification 2', time: '00:00:00', unread: false },
+    { id: 3, message: 'Notification 3', time: '00:00:00', unread: true }
   ];
 
   // Function to mark notification as read
@@ -20,9 +20,6 @@
     // Here you could fetch notifications from an API/database
     // For demonstration purposes, using static data
     // Replace this with your actual fetching mechanism
-    // For example:
-    // const response = await fetch('your-api-endpoint');
-    // notifications = await response.json();
   });
 </script>
 
@@ -40,9 +37,10 @@
   <tbody class="bg-white divide-y divide-gray-200">
     {#each notifications as notification}
       <tr class={notification.unread ? 'bg-yellow-100' : ''}>
-        <td class="px-6 py-4 whitespace-nowrap">
+        <td class="px-6 py-4 whitespace-nowrap flex flex-col gap-2">
           <div class="text-sm text-gray-900">{notification.message}</div>
-        </td>
+          <div class="text-sm text-gray-900">{notification.time}</div>
+        </td>        
         <td class="px-6 py-4 whitespace-nowrap">
           {#if notification.unread}
             <button
