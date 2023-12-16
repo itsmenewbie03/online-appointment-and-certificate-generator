@@ -4,33 +4,41 @@
     import { goto } from '$app/navigation'
     import { get_session_status, get_new_access_token } from '$lib/session.js'
     /** @type {import('./$types').PageData} */
+    const capitalize = (s) =>
+        (s && s.charAt(0).toUpperCase() + s.slice(1)) || ''
     export let data
     let loaded = false
-    let funData;
-    let jokes;
-    let ip;
+    let stuff_to_do
+    let jokes
+    let ip_data
+    let weather_data
 
     onMount(async () => {
         // INFO: the code below is a mess, this needs to be rewritten
         // I will rewrite this soon xD
 
-        const response = await fetch('http://www.boredapi.com/api/activity')
-        const joke = await fetch('https://official-joke-api.appspot.com/random_joke')
+        const boredapi = await fetch(
+            'http://www.boredapi.com/api/activity',
+        ).then((res) => res.json())
+        console.log(`[BOREDAPI]: ${JSON.stringify(boredapi)}`)
 
+        stuff_to_do = boredapi.activity
 
-        if (response.ok) {
-            const jokeData = await joke.json();
-            const data = await response.json();
+        const joke = await fetch(
+            'https://official-joke-api.appspot.com/random_joke',
+        ).then((res) => res.json())
+        jokes = joke
 
+        const weather = await fetch(
+            'https://openweathermap.org/data/2.5/onecall?lat=8&lon=125&units=metric&appid=439d4b804bc8187953eb36d2a8c26a02',
+        ).then((res) => res.json())
+        weather_data = weather
 
-            funData = data;
-            jokes = jokeData;
+        const ip = await fetch('http://ip-api.com/json/').then((res) =>
+            res.json(),
+        )
+        ip_data = ip
 
-
-        } else {
-            console.error('Request failed with status:', response.status);
-            console.error('Request failed with status:', jokeData.status)
-        }
         if (data.a) {
             const parsed = atob(data.a)
             const [access_token, refresh_token] = parsed.split(':')
@@ -173,41 +181,52 @@
             <span class="sr-only">Loading...</span>
         </div>
     {:else}
-  
-    <div class="flex flex-wrap justify-between">
-        <!-- Joke Card -->
-        <div class="w-full md:w-1/2 p-4">
-            <div class="mb-4">
+        <div class="flex flex-wrap justify-between">
+            <!-- Joke Card -->
+            <div class="w-full md:w-1/2 p-4">
+                <div class="mb-4">
+                    <div class="border rounded-lg p-4">
+                        <h2 class="text-xl font-bold mb-2">Random Joke</h2>
+                        <p class="text-gray-900">
+                            {`${jokes.setup} ${jokes.punchline}`}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Motivational Quote Card -->
+            <div class="w-full md:w-1/2 p-4">
                 <div class="border rounded-lg p-4">
-                    <h2 class="text-xl font-bold mb-2">Joke</h2>
-                    <p class="text-gray-900">{`${jokes.setup} ${jokes.punchline}`}</p>
+                    <h2 class="text-xl font-bold mb-2">Random Stuff To Do</h2>
+                    <p class="text-gray-900">{stuff_to_do}</p>
+                </div>
+            </div>
+
+            <!-- Weather Card -->
+            <div class="w-full p-4">
+                <div class="border rounded-lg p-4">
+                    <h2 class="text-xl font-bold mb-2">Current Weather</h2>
+                    <p class="text-gray-900">
+                        {`The temperature is ${
+                            weather_data.current.temp
+                        }°C feels like ${
+                            weather_data.current.feels_like
+                        }°C.\n ${capitalize(
+                            weather_data.current.weather[0].description,
+                        )}`}
+                    </p>
+                </div>
+            </div>
+
+            <!-- Info Card -->
+            <div class="w-full p-4">
+                <div class="border rounded-lg p-4">
+                    <h2 class="text-xl font-bold mb-2">Your Information</h2>
+                    <p class="text-gray-900">
+                        {`Base on Your IP Address ${ip_data.query}, You are located in ${ip_data.city}, ${ip_data.regionName}, ${ip_data.country}.\nYour timezone is ${ip_data.timezone}.\nYour ISP is ${ip_data.isp}.`}
+                    </p>
                 </div>
             </div>
         </div>
-    
-        <!-- Motivational Quote Card -->
-        <div class="w-full md:w-1/2 p-4">
-            <div class="border rounded-lg p-4">
-                <h2 class="text-xl font-bold mb-2">Motivational Quote</h2>
-                <p class="text-gray-900">{funData.activity}</p>
-            </div>
-        </div>
-    
-        <!-- Weather Card -->
-        <div class="w-full p-4">
-            <div class="border rounded-lg p-4">
-                <h2 class="text-xl font-bold mb-2">Weather</h2>
-                <p class="text-gray-900">
-                    <!-- call weather api -->
-                </p>
-            </div>
-        </div>
-    </div>
-    
-    
-    
-
-    
-        
     {/if}
 </div>
