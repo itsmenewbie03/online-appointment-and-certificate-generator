@@ -7,10 +7,27 @@
     let delete_target_id
 
     let transactions = []
+
+    const format_date = (dateString) => {
+        console.log(`[DATE_STRING]: ${dateString}`)
+        const originalDate = new Date(dateString)
+        const formattedDate = originalDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            timeZone: 'Asia/Manila',
+            timeZoneName: 'short',
+        })
+        return formattedDate
+    }
+
     onMount(async () => {
         try {
             const response = await fetch(
-                'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/transactions/list',
+                'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/transactions/user/list',
                 {
                     method: 'GET',
                     headers: {
@@ -72,8 +89,8 @@
                     {transaction.status}
                 </td>
                 <td class="px-6 py-3">{format_date(transaction.date)}</td>
-
             </tr>
         {/each}
     </table>
 </div>
+
