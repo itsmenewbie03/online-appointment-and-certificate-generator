@@ -42,6 +42,38 @@
         const { status, body } = resp
         const _alert = status === 200 ? toast.success : toast.error
         _alert(body.message)
+        if (status === 200) {
+            // get name of document based on _id
+            const name = documents.find((doc) => doc._id === document_id).type
+            download(body.document, `${info.last_name}_${name}.docx`)
+        }
+    }
+
+    // NOTE: convert base64 to blob
+    const base64ToBlob = (base64) => {
+        const raw = window.atob(base64)
+        const rawLength = raw.length
+        const uInt8Array = new Uint8Array(rawLength)
+        for (let i = 0; i < rawLength; ++i) {
+            uInt8Array[i] = raw.charCodeAt(i)
+        }
+        const contentType = 'application/docx'
+        return new Blob([uInt8Array], { type: contentType })
+    }
+
+    // NOTE: creat a function that takes a base 64 string and converts it to a blob and downloads it
+    const download = (base64, filename) => {
+        const blob = base64ToBlob(base64)
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = filename
+        document.body.appendChild(a)
+        a.click()
+        setTimeout(() => {
+            document.body.removeChild(a)
+            window.URL.revokeObjectURL(url)
+        }, 0)
     }
 </script>
 
