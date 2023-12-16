@@ -6,6 +6,9 @@
     let target_id
     let delete_target_id
 
+    let or_number
+    let req_body
+
     let transactions = []
     onMount(async () => {
         try {
@@ -35,6 +38,59 @@
             console.error('Error fetching transaction data:', error.message)
         }
     })
+
+    const generateDoc = async () => {
+        const endpoint =
+            'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/documents/generate'
+        console.log(`[REQ_BODY]: ${JSON.stringify(req_body)}`)
+        const opts = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            },
+            body: JSON.stringify(req_body),
+        }
+        const resp = await fetch(endpoint, opts).then(async (res) => {
+            return { status: res.status, body: await res.json() }
+        })
+        const { status, body } = resp
+        const _alert = status === 200 ? toast.success : toast.error
+        _alert(body.message)
+        download(
+            body.document,
+            `${req_body.user_data.last_name}_${req_body.document_data.type}.docx`,
+        )
+        toggleGenerate()
+    }
+
+    // NOTE: convert base64 to blob
+    const base64ToBlob = (base64) => {
+        const raw = window.atob(base64)
+        const rawLength = raw.length
+        const uInt8Array = new Uint8Array(rawLength)
+        for (let i = 0; i < rawLength; ++i) {
+            uInt8Array[i] = raw.charCodeAt(i)
+        }
+        const contentType = 'application/docx'
+        return new Blob([uInt8Array], { type: contentType })
+    }
+
+    // NOTE: creat a function that takes a base 64 string and converts it to a blob and downloads it
+    const download = (base64, filename) => {
+        const blob = base64ToBlob(base64)
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = filename
+        document.body.appendChild(a)
+        a.click()
+        setTimeout(() => {
+            document.body.removeChild(a)
+            window.URL.revokeObjectURL(url)
+        }, 0)
+    }
+
     const update_status = async () => {
         const endpoint =
             'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/transactions/update'
@@ -92,11 +148,14 @@
         })
         return formattedDate
     }
-
-    const show_generate_modal = () => {
-        console.log("modal clicked!")
+    // TODO: we got a copy of the transaction here
+    // lets parse this xD
+    const show_generate_modal = (transaction) => {
+        // INFO: lets prepare the request body
+        req_body = transaction
         toggleGenerate()
     }
+
     const show_edit_modal = (id, status) => {
         console.log(`edit dizz: ${id} with status ${status}`)
         target_id = id
@@ -118,7 +177,6 @@
     let generateModal = false
     let showModal = false
     let deleteModal = false
-
 
     const toggleGenerate = () => {
         generateModal = !generateModal
@@ -177,7 +235,7 @@
                 <td class="px-6 py-4 text-right">
                     <a
                         href="#"
-                        on:click={show_generate_modal}
+                        on:click={show_generate_modal(transaction)}
                         class="font-medium pr-2 text-green-600 dark:text-green-400 hover:underline"
                         >Generate</a
                     >
@@ -211,10 +269,12 @@
     >
         <div class="bg-white p-8 rounded-lg">
             <h2 class="text-2xl mb-4">Generate Document</h2>
-            <label for="">Please enter OR Number leave blank if the document is free</label>
-            <br>
-            <input type="text">
-            <br>
+            <label for=""
+                >Please enter OR Number leave blank if the document is free</label
+            >
+            <br />
+            <input type="text" bind:value={or_number} />
+            <br />
             <button
                 class="bg-green-500 text-white px-4 py-2 mt-4 rounded-md"
                 on:click={async () => {
@@ -222,6 +282,15 @@
                 }}
             >
                 Confirm
+            </button>
+
+            <button
+                class="bg-green-500 text-white px-4 py-2 mt-4 rounded-md"
+                on:click={() => {
+                    toggleGenerate()
+                }}
+            >
+                Cancel
             </button>
         </div>
     </div>
