@@ -188,10 +188,10 @@
                 >Forgot Password?</a
             >
             <a
-            href="/signup"
-            class="grid place-items-center font-medium text-blue-600 dark:text-blue-500 hover:underline"
-            >Sign Up?</a
-        >
+                href="/signup"
+                class="grid place-items-center font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                >Sign Up?</a
+            >
         </form>
     </div>
 </div>
