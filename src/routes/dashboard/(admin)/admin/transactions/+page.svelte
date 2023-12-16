@@ -92,6 +92,11 @@
         })
         return formattedDate
     }
+
+    const show_generate_modal = () => {
+        console.log("modal clicked!")
+        toggleGenerate()
+    }
     const show_edit_modal = (id, status) => {
         console.log(`edit dizz: ${id} with status ${status}`)
         target_id = id
@@ -110,9 +115,14 @@
     }
 
     //Edit Modal
+    let generateModal = false
     let showModal = false
     let deleteModal = false
 
+
+    const toggleGenerate = () => {
+        generateModal = !generateModal
+    }
     function toggleModal() {
         showModal = !showModal
     }
@@ -166,6 +176,12 @@
                 <td class="px-6 py-3">{format_date(transaction.date)}</td>
                 <td class="px-6 py-4 text-right">
                     <a
+                        href="#"
+                        on:click={show_generate_modal}
+                        class="font-medium pr-2 text-green-600 dark:text-green-400 hover:underline"
+                        >Generate</a
+                    >
+                    <a
                         on:click={() => {
                             show_edit_modal(transaction._id, transaction.status)
                         }}
@@ -189,12 +205,34 @@
 
 <!-- Edit Modal -->
 
+{#if generateModal}
+    <div
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+    >
+        <div class="bg-white p-8 rounded-lg">
+            <h2 class="text-2xl mb-4">Generate Document</h2>
+            <label for="">Please enter OR Number leave blank if the document is free</label>
+            <br>
+            <input type="text">
+            <br>
+            <button
+                class="bg-green-500 text-white px-4 py-2 mt-4 rounded-md"
+                on:click={async () => {
+                    await generateDoc()
+                }}
+            >
+                Confirm
+            </button>
+        </div>
+    </div>
+{/if}
+
 {#if showModal}
     <div
         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
     >
         <div class="bg-white p-8 rounded-lg">
-            <h2 class="text-2xl mb-4">Modal Content</h2>
+            <h2 class="text-2xl mb-4">Edit</h2>
             <p>This is a simple modal for: {target_id}</p>
             <select bind:value={current_status}>
                 <option value="pending">Pending</option>
@@ -219,7 +257,7 @@
         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
     >
         <div class="bg-white p-8 rounded-lg">
-            <h2 class="text-2xl mb-4">Modal Content</h2>
+            <h2 class="text-2xl mb-4">Delete</h2>
             <p>This is a simple modal delete for: {delete_target_id}</p>
             <button
                 class="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md"
