@@ -115,6 +115,9 @@
             action="?/OAuth2"
             on:submit={handle_submit}
         >
+        <div class="text-center mb-8 font-bold">
+            <label for="">Employee Login</label>
+        </div>
             <div class="grid mb-8 place-items-center">
                 <img src="/src/lib/assets/BRGY.-BANGCU1D-150x150.png" alt="" />
             </div>

@@ -81,8 +81,11 @@
 <div
     class="grid place-items-center mt-10 py-[60px] px-12 bg-white border border-gray-200 rounded-lg shadow"
 >
-    <div class="">
-        <form class="grid grid-cols-2 gap-6" on:submit={handle_submit}>
+    <div class="flex justify-center mt-10 p-4 sm:p-6">
+        <form
+            class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl w-full"
+            on:submit={handle_submit}
+        >
             <div>
                 <div>
                     <select
@@ -217,4 +220,3 @@
         </form>
     </div>
 </div>
-

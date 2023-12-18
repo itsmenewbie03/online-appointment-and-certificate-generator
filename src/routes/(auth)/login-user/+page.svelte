@@ -190,7 +190,7 @@
             <a
                 href="/signup"
                 class="grid place-items-center font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >Sign Up?</a
+                >Do not have an account? Register now</a
             >
         </form>
     </div>

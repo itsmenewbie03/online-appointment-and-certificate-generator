@@ -1,7 +1,10 @@
 <script>
     import { onMount } from 'svelte'
     import { goto } from '$app/navigation'
+
     let residents = []
+    let filteredResidents = []
+
     const format_date = (dateString) => {
         const originalDate = new Date(dateString)
         const formattedDate = originalDate.toLocaleDateString('en-US', {
@@ -11,6 +14,7 @@
         })
         return formattedDate
     }
+
     onMount(async () => {
         try {
             const response = await fetch(
@@ -18,9 +22,7 @@
                 {
                     method: 'GET',
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem(
-                            'access_token',
-                        )}`,
+                        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
                     },
                 },
             )
@@ -28,6 +30,7 @@
             if (response.ok) {
                 let json_response = await response.json()
                 residents = json_response.data
+                filterResidents() // Populate the initial filteredResidents
             } else {
                 console.error(
                     'Failed to fetch resident data:',
@@ -39,6 +42,7 @@
             console.error('Error fetching resident data:', error.message)
         }
     })
+
     const edit_resident = (id) => {
         console.log(`EDIT RESIDENT DIZZ: ${id}`)
         goto(`/create/${id}`)
@@ -50,20 +54,23 @@
     function toggleModal() {
         showModal = !showModal
     }
+
+    let searchKey = '';
+
+    function filterResidents() {
+        filteredResidents = residents.filter(resident => {
+            const fullName = `${resident.first_name} ${resident.middle_name || ''} ${resident.last_name}`.toUpperCase()
+            return fullName.includes(searchKey.toUpperCase()) || searchKey.trim() === ''
+        })
+    }
 </script>
 
-<div class="relative py-12 place-items-center">
-    <div class="flex justify-between items-center w-full mb-4">
-        <label
-            for="default-search"
-            class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-        >
-            Search
-        </label>
-        <div class="relative mb-4 mr-[60%]">
-            <div
-                class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
-            >
+<div class="px-4 py-8 sm:px-6 md:px-8 lg:px-12">
+    <div class="flex flex-col sm:flex-row items-center justify-between mb-4">
+        <div class="w-full sm:w-auto mb-4 sm:mb-0 sm:mr-4">
+            <label for="default-search" class="sr-only">Search</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg
                     class="w-4 h-4 text-gray-500 dark:text-gray-400"
                     aria-hidden="true"
@@ -81,36 +88,38 @@
                 </svg>
             </div>
             <input
-                type="search"
-                id="default-search"
-                class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Search Resident Database"
-                required
+              type="search"
+              id="searchKey"
+              class="block w-full sm:w-64 p-4 pl-10 text-sm border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Search Resident Database"
+              bind:value={searchKey}
+              on:input={filterResidents}
+
             />
+          </div>
         </div>
-        <div class="flex justify-end mb-2">
-            <a href="/dashboard/admin/create">
-                <button
-                    type="button"
-                    class="text-white bg-green-500 hover:bg-green-400 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-500 dark:focus:ring-green-800"
-                >
-                    Create New Account
-                </button>
-            </a>
-        </div>
+    <!-- Create New Account Button -->
+    <div class="flex justify-end">
+        <a href="/dashboard/admin/create">
+          <button
+            type="button"
+            class="text-white bg-green-500 hover:bg-green-400 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2"
+          >
+            Create New Account
+          </button>
+        </a>
+      </div>
     </div>
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table
-            class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
-        >
+   <!-- Table -->
+   <div class="overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-gray-500">
             <thead class="text-xs text-gray-50 uppercase bg-green-400">
                 <tr>
                     <th scope="col" class="px-6 py-3"> Name </th>
                     <th scope="col" class="px-6 py-3"> Date of Birth </th>
                     <th scope="col" class="px-6 py-3"> Address </th>
                     <th scope="col" class="px-6 py-3"> Period of Residency </th>
-                    <th scope="col" class="px-6 py-3"> Email </th>
                     <th scope="col" class="px-6 py-3"> Phone Number </th>
                     <th scope="col" class="px-6 py-3 text-right">
                         Actions
@@ -120,6 +129,7 @@
             </thead>
             <tbody>
                 {#each residents as resident (resident._id)}
+                {#if filteredResidents.includes(resident) || searchKey === ''}
                     <tr>
                         <td class="px-6 py-3"
                             >{`${resident.first_name} ${
@@ -134,7 +144,6 @@
                         <td class="px-6 py-3">{resident.address}</td>
                         <td class="px-6 py-3">{resident.period_of_residency}</td
                         >
-                        <td class="px-6 py-3">{resident.email}</td>
                         <td class="px-6 py-3">{resident.phone_number}</td>
                         <td class="px-6 py-4 text-right">
                             <a
@@ -152,6 +161,7 @@
                             >
                         </td>
                     </tr>
+                    {/if}
                 {/each}
             </tbody>
         </table>

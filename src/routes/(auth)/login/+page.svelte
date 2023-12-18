@@ -108,6 +108,9 @@
         class=" max-w-sm py-[60px] w-2/3 px-12 bg-white border border-gray-200 rounded-lg shadow"
     >
         <form class="auth-form" method="post" on:submit={handle_submit}>
+            <div class="text-center mb-8 font-bold">
+                <label for="">Admin Login</label>
+            </div>
             <div class="grid mb-8 place-items-center">
                 <img src="/src/lib/assets/BRGY.-BANGCU1D-150x150.png" alt="" />
             </div>
