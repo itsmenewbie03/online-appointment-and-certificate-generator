@@ -132,9 +132,11 @@
         >
             Save Changes
         </button>
-        <button class="bg-red-500 text-white px-4 py-2 mt-4 rounded-md">
-            Cancel
-        </button>
+        <a href="/dashboard/admin/resident-db">
+            <button class="bg-red-500 text-white px-4 py-2 mt-4 rounded-md">
+                Cancel
+            </button>
+        </a>
         </div></div>
     </form>
 </div>
