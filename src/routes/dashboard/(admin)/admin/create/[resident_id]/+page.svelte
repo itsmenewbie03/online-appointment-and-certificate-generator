@@ -73,13 +73,10 @@
     }
 </script>
 
-<h1>
-    HEloow DIZZ {resident_data.first_name ?? 'Loading...'}
-    {resident_data.last_name ?? 'Loading...'}
-</h1>
-
-<div>
-    <form action="">
+<div class="max-w-sm mx-auto bg-white border border-gray-200 rounded-lg shadow-md">
+    <form class="p-10" action="">
+        <div class="grid grid-cols-2 gap-6 mb-8">
+            <div class="relative z-0 w-full mb-6 group">
         <label for="firstName">First Name:</label>
         <input
             type="text"
@@ -138,5 +135,6 @@
         <button class="bg-red-500 text-white px-4 py-2 mt-4 rounded-md">
             Cancel
         </button>
+        </div></div>
     </form>
 </div>
