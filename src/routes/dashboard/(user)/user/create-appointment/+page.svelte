@@ -3,6 +3,9 @@
     let documents = []
     let date
     let document_id
+
+    import toast, { Toaster } from 'svelte-french-toast'
+
     const handle_submit = async (event) => {
         event.preventDefault()
         const endpoint =
@@ -20,7 +23,12 @@
             }),
         }
         // console.log(`WE ARE SENDING THIS TO BACKEND: ${opts.body}`)
-        const resp = await fetch(endpoint, opts).then((res) => res.json())
+        const resp = await fetch(endpoint, opts).then(async (res) => {
+            return { status: res.status, message: await res.json() }
+        })
+        const { status, message } = resp
+        const _alert = status == 200 ? toast.success : toast.error
+        _alert(message.message)
         console.log(`[CREATE_APPOINTMENT_RESP]: ${JSON.stringify(resp)}`)
     }
     onMount(async () => {
@@ -38,18 +46,28 @@
     })
 </script>
 
+<Toaster />
 <div class="max-w-xl mx-auto mt-10 px-4">
     <div class="bg-white border border-gray-200 rounded-lg shadow-md">
-        <form class="p-4 md:p-6 space-y-4 md:space-y-6" on:submit={handle_submit}>
+        <form
+            class="p-4 md:p-6 space-y-4 md:space-y-6"
+            on:submit={handle_submit}
+        >
             <div>
-                <label for="dropdown1" class="block text-sm font-medium text-gray-700">Select document type</label>
+                <label
+                    for="dropdown1"
+                    class="block text-sm font-medium text-gray-700"
+                    >Select document type</label
+                >
                 <select
                     bind:value={document_id}
                     id="dropdown1"
                     class="mt-1 block w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500 text-sm text-gray-900 border p-2.5"
                     required
                 >
-                    <option value="" disabled selected>Select document type...</option>
+                    <option value="" disabled selected
+                        >Select document type...</option
+                    >
                     {#each documents as document}
                         <option value={document._id}>{document.type}</option>
                     {/each}
@@ -57,7 +75,11 @@
                 </select>
             </div>
             <div>
-                <label for="date" class="block text-sm font-medium text-gray-700">Date and Time</label>
+                <label
+                    for="date"
+                    class="block text-sm font-medium text-gray-700"
+                    >Date and Time</label
+                >
                 <input
                     type="datetime-local"
                     name="date"
@@ -69,18 +91,21 @@
 
             <!-- CALENDAR STUFF -->
 
-            <div class="flex flex-col md:flex-row md:justify-center md:space-x-4">
+            <div
+                class="flex flex-col md:flex-row md:justify-center md:space-x-4"
+            >
                 <button
                     type="button"
                     class="text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-600 font-medium rounded-full text-sm px-5 py-2.5 text-center mt-2 md:mt-0"
-                >Cancel</button>
+                    >Cancel</button
+                >
                 <button
                     id="create-account"
                     type="submit"
                     class="text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-600 font-medium rounded-full text-sm px-5 py-2.5 text-center mt-2 md:mt-0"
-                >Create Appointment</button>
+                    >Create Appointment</button
+                >
             </div>
         </form>
     </div>
 </div>
-
