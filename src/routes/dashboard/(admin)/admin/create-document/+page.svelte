@@ -64,7 +64,7 @@
 
             try {
                 const resp = await fetch(
-                    'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/documents/create',
+                    'https://itsmenewbie03.is-a.dev/appt/api/documents/create',
                     {
                         method: 'POST',
 

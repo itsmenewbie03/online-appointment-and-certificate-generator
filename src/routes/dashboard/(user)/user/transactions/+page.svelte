@@ -27,7 +27,7 @@
     onMount(async () => {
         try {
             const response = await fetch(
-                'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/transactions/user/list',
+                'https://itsmenewbie03.is-a.dev/appt/api/transactions/user/list',
                 {
                     method: 'GET',
                     headers: {

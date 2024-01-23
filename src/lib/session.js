@@ -5,7 +5,7 @@
  */
 const get_session_status = async (access_token) => {
     const endpoint =
-        'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/auth/session/status'
+        'https://itsmenewbie03.is-a.dev/appt/api/auth/session/status'
     const opts = {
         method: 'GET',
         headers: {
@@ -24,7 +24,7 @@ const get_session_status = async (access_token) => {
  */
 const get_new_access_token = async (refresh_token) => {
     const endpoint =
-        'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/auth/session/refresh'
+        'https://itsmenewbie03.is-a.dev/appt/api/auth/session/refresh'
     const opts = {
         method: 'GET',
         headers: {

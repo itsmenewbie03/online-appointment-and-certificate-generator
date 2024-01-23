@@ -8,7 +8,7 @@
 
     onMount(async () => {
         const endpoint =
-            'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/documents/list'
+            'https://itsmenewbie03.is-a.dev/appt/api/documents/list'
         const opts = {
             method: 'GET',
             headers: {
@@ -22,7 +22,7 @@
     const handle_submit = async (event) => {
         event.preventDefault()
         console.log('[INIT]: WALKIN SUBMITTED')
-        const endpoint = `https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/documents/walkin/generate`
+        const endpoint = `https://itsmenewbie03.is-a.dev/appt/api/documents/walkin/generate`
         const opts = {
             method: 'POST',
             headers: {

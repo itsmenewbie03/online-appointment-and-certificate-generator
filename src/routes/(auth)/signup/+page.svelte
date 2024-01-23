@@ -22,7 +22,7 @@
         }
 
         const url =
-            'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/user/signup'
+            'https://itsmenewbie03.is-a.dev/appt/api/user/signup'
 
         const req_body = {
             email: email,

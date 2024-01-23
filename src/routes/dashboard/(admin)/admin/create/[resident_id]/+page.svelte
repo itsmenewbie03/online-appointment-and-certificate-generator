@@ -13,7 +13,7 @@
     const get_resident_info = async (id) => {
         console.log(`TRYING TO GET INFO FOR: ${id}`)
         const endpoint =
-            'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/data/resident/find'
+            'https://itsmenewbie03.is-a.dev/appt/api/data/resident/find'
         const opts = {
             method: 'POST',
             headers: {
@@ -42,7 +42,7 @@
 
     const update_resident_info = async () => {
         const endpoint =
-            'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/data/resident/update'
+            'https://itsmenewbie03.is-a.dev/appt/api/data/resident/update'
         const opts = {
             method: 'PATCH',
             headers: {

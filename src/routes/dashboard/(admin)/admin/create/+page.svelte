@@ -27,7 +27,7 @@
             return
         }
         console.log(`Trying to create ${account_type} account`)
-        const endpoint = `https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/${account_type}/register`
+        const endpoint = `https://itsmenewbie03.is-a.dev/appt/api/${account_type}/register`
         const opts = {
             method: 'POST',
             headers: {

@@ -18,7 +18,7 @@
     onMount(async () => {
         try {
             const response = await fetch(
-                'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/data/resident/list',
+                'https://itsmenewbie03.is-a.dev/appt/api/data/resident/list',
                 {
                     method: 'GET',
                     headers: {
@@ -52,7 +52,7 @@
 
     const delete_resident = async (id) => {
         const endpoint =
-            'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/data/resident/delete'
+            'https://itsmenewbie03.is-a.dev/appt/api/data/resident/delete'
         const opts = {
             method: 'DELETE',
             headers: {

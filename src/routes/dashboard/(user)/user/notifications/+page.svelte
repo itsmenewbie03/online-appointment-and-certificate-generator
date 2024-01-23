@@ -23,7 +23,7 @@
     // Function to mark notification as read
     const markAsRead = async (id) => {
         const endpoint =
-            'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/user/notifications/mark_as_read'
+            'https://itsmenewbie03.is-a.dev/appt/api/user/notifications/mark_as_read'
         const opts = {
             method: 'PATCH',
             headers: {
@@ -47,7 +47,7 @@
     // Simulating fetching notifications from an API or database
     onMount(async () => {
         const resp = await fetch(
-            'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/user/notifications/list',
+            'https://itsmenewbie03.is-a.dev/appt/api/user/notifications/list',
             {
                 method: 'GET',
                 headers: {

@@ -11,7 +11,7 @@
         event.preventDefault()
 
         const url =
-            'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/auth/user/login'
+            'https://itsmenewbie03.is-a.dev/appt/api/auth/user/login'
         // Add the reCAPTCHA token to the form data
         const formData = {
             email: email,

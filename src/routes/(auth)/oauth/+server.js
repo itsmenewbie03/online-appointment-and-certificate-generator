@@ -19,7 +19,7 @@ export const GET = async ({ url }) => {
     console.log('url is', url)
 
     const login_endpoint =
-        'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/oauth/google/login'
+        'https://itsmenewbie03.is-a.dev/appt/api/oauth/google/login'
     // INFO: make sure to change the role accordingly
     const opts = {
         method: 'POST',
