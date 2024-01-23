@@ -10,8 +10,7 @@
     const handle_submit = async (event) => {
         event.preventDefault()
 
-        const url =
-            'https://itsmenewbie03.is-a.dev/appt/api/auth/user/login'
+        const url = 'https://itsmenewbie03.is-a.dev/appt/api/auth/user/login'
         // Add the reCAPTCHA token to the form data
         const formData = {
             email: email,

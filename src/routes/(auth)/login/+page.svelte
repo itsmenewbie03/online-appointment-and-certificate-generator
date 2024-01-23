@@ -9,8 +9,7 @@
     const handle_submit = async (event) => {
         event.preventDefault()
 
-        const url =
-            'https://itsmenewbie03.is-a.dev/appt/api/auth/admin/login'
+        const url = 'https://itsmenewbie03.is-a.dev/appt/api/auth/admin/login'
 
         const formData = {
             email: email,

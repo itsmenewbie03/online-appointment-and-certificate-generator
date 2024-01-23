@@ -95,7 +95,9 @@
 <main class="text-center mt-8">
     <Toaster />
     <div class="flex justify-center">
-        <div class="max-w-md w-full bg-white border border-gray-200 rounded-lg shadow-md">
+        <div
+            class="max-w-md w-full bg-white border border-gray-200 rounded-lg shadow-md"
+        >
             <form on:submit|preventDefault={handleSubmit} class="p-6 space-y-4">
                 <form on:submit|preventDefault={handleSubmit}>
                     <Radio
@@ -112,7 +114,7 @@
                         id="file"
                         on:change={handleFileChange}
                     />
-    
+
                     <label for="description">Document Name</label>
                     <input
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -121,7 +123,7 @@
                         id="description"
                         required
                     />
-    
+
                     <label for="description">Price</label>
                     <input
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -222,7 +224,7 @@
                                 <span class="ml-2">Phone Number</span>
                             </label>
                         </div>
-    
+
                         <div>
                             <label class="flex items-center">
                                 <input
@@ -236,9 +238,9 @@
                         </div>
                         <!-- Additional checkboxes can be added similarly -->
                     </div>
-    
+
                     <!--PLEASE DO Add more checkboxes coz it's needed -->
-    
+
                     <button
                         class="focus:outline-none text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                         type="submit">Upload</button
@@ -273,4 +275,3 @@
         cursor: pointer;
     }
 </style>
-

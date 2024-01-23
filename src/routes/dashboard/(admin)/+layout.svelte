@@ -140,7 +140,9 @@
                     href="/dashboard/admin/signup-approval"
                     class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-green-300 dark:hover:bg-gray-700 group"
                 >
-                    <span class="flex-1 ml-3 whitespace-nowrap">Pending Signups</span>
+                    <span class="flex-1 ml-3 whitespace-nowrap"
+                        >Pending Signups</span
+                    >
                 </a>
             </li>
             <li>

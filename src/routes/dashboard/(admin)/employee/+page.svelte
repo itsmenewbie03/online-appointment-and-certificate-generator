@@ -39,7 +39,6 @@
         )
         ip_data = ip
 
-
         if (data.a) {
             const parsed = atob(data.a)
             const [access_token, refresh_token] = parsed.split(':')

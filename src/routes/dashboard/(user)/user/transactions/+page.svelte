@@ -93,4 +93,3 @@
         {/each}
     </table>
 </div>
-

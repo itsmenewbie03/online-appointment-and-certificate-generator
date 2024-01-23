@@ -21,8 +21,7 @@
             return
         }
 
-        const url =
-            'https://itsmenewbie03.is-a.dev/appt/api/user/signup'
+        const url = 'https://itsmenewbie03.is-a.dev/appt/api/user/signup'
 
         const req_body = {
             email: email,

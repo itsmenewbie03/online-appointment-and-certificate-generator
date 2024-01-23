@@ -146,4 +146,3 @@
         {/each}
     </table>
 </div>
-

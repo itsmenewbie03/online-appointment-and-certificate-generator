@@ -219,12 +219,13 @@
                     />
                 </div>
             </div>
-            <a href="/dashboard/admin/resident-db" class="text-white bg-green-400 hover:bg-green-500 focus:outline-none focus:ring-4 focus:ring-green-600 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2">
-                <button>
-                    Cancel
-                </button>
+            <a
+                href="/dashboard/admin/resident-db"
+                class="text-white bg-green-400 hover:bg-green-500 focus:outline-none focus:ring-4 focus:ring-green-600 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2"
+            >
+                <button> Cancel </button>
             </a>
-            
+
             <button
                 id="create-account"
                 type="submit"
