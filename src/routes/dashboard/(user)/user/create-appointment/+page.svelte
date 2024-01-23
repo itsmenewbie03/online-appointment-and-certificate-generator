@@ -9,7 +9,7 @@
     const handle_submit = async (event) => {
         event.preventDefault()
         const endpoint =
-            'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/transactions/create'
+            'https://itsmenewbie03.is-a.dev/appt/api/transactions/create'
 
         const opts = {
             method: 'POST',
@@ -33,7 +33,7 @@
     }
     onMount(async () => {
         const endpoint =
-            'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/documents/list'
+            'https://itsmenewbie03.is-a.dev/appt/api/documents/list'
         const opts = {
             method: 'GET',
             headers: {

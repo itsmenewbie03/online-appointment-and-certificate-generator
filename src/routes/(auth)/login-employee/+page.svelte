@@ -11,7 +11,7 @@
         event.preventDefault()
 
         const url =
-            'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/auth/employee/login'
+            'https://itsmenewbie03.is-a.dev/appt/api/auth/employee/login'
         // Add the reCAPTCHA token to the form data
         const formData = {
             email: email,
@@ -115,9 +115,9 @@
             action="?/OAuth2"
             on:submit={handle_submit}
         >
-        <div class="text-center mb-8 font-bold">
-            <label for="">Employee Login</label>
-        </div>
+            <div class="text-center mb-8 font-bold">
+                <label for="">Employee Login</label>
+            </div>
             <div class="grid mb-8 place-items-center">
                 <img src="/src/lib/assets/BRGY.-BANGCU1D-150x150.png" alt="" />
             </div>

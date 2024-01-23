@@ -13,7 +13,7 @@
     onMount(async () => {
         try {
             const response = await fetch(
-                'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/transactions/list',
+                'https://itsmenewbie03.is-a.dev/appt/api/transactions/list',
                 {
                     method: 'GET',
                     headers: {
@@ -41,7 +41,7 @@
 
     const generateDoc = async () => {
         const endpoint =
-            'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/documents/generate'
+            'https://itsmenewbie03.is-a.dev/appt/api/documents/generate'
         console.log(`[REQ_BODY]: ${JSON.stringify(req_body)}`)
         const opts = {
             method: 'POST',
@@ -93,7 +93,7 @@
 
     const update_status = async () => {
         const endpoint =
-            'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/transactions/update'
+            'https://itsmenewbie03.is-a.dev/appt/api/transactions/update'
         const opts = {
             method: 'PATCH',
             headers: {
@@ -118,7 +118,7 @@
     }
     const delete_status = async () => {
         const endpoint =
-            'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/transactions/delete'
+            'https://itsmenewbie03.is-a.dev/appt/api/transactions/delete'
         const opts = {
             method: 'DELETE',
             headers: {

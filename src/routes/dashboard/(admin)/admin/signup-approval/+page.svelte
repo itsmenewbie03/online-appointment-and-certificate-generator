@@ -8,7 +8,7 @@
     onMount(async () => {
         try {
             const response = await fetch(
-                'https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/user/pending/list',
+                'https://itsmenewbie03.is-a.dev/appt/api/user/pending/list',
                 {
                     method: 'GET',
                     headers: {
@@ -34,7 +34,7 @@
         }
     })
     const approve = async (id) => {
-        const endpoint = `https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/user/pending/approve`
+        const endpoint = `https://itsmenewbie03.is-a.dev/appt/api/user/pending/approve`
         const opts = {
             method: 'POST',
             headers: {
@@ -57,7 +57,7 @@
         }
     }
     const reject = async (id) => {
-        const endpoint = `https://appt-cert-gen-api.itsdarkhere4ever.repl.co/api/user/pending/reject`
+        const endpoint = `https://itsmenewbie03.is-a.dev/appt/api/user/pending/reject`
         const opts = {
             method: 'POST',
             headers: {
@@ -146,4 +146,3 @@
         {/each}
     </table>
 </div>
-
