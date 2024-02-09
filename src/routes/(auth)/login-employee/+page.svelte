@@ -82,14 +82,6 @@
     >
         <li class="me-2">
             <a
-                href="/login-user"
-                aria-current="page"
-                class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
-                >User</a
-            >
-        </li>
-        <li class="me-2">
-            <a
                 href="/login-employee"
                 class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
                 >Employee</a
