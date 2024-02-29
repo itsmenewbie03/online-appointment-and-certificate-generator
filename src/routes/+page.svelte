@@ -21,7 +21,7 @@
             const { status, body } = await get_session_status(access_token)
             const success = status == 200
             if (!success) {
-                console.log('access token is invalid')
+                console.log('access token is invalid in data.a')
                 // try to generate new access token
                 // if no refresh token is available redirect the user to /login
                 if (!refresh_token) {
@@ -85,13 +85,16 @@
         const { status, body } = await get_session_status(access_token)
         const success = status == 200
         if (!success) {
-            console.log('access token is invalid')
+            console.log('access token is invalid without data.a')
             // try to generate new access token
             const refresh_token = localStorage.getItem('refresh_token')
+            console.log('refresh_token: ', refresh_token)
             // if no refresh token is available redirect the user to /login
             if (!refresh_token) {
-                toast.error(body.message)
+                console.log('no refresh token')
+                let t_id = toast.error(body.message)
                 setTimeout(() => {
+                    toast.remove(t_id)
                     goto('/login')
                 }, 1000)
                 return
@@ -100,9 +103,10 @@
             const success = status == 200
             // if the refresh token is invalid redirect the user to /login
             if (!success) {
-                toast.error(body.message)
+                let t_id = toast.error(body.message)
                 setTimeout(() => {
                     goto('/login')
+                    toast.remove(t_id)
                 }, 1000)
                 return
             }
@@ -122,4 +126,4 @@
 
 <!-- NOTE: please create some good looking loading stuff here xD  -->
 <Toaster />
-<h1>WILL REDIRECT YOU PLEASE WAIT...</h1>
+<h1>REDIRECTING PLEASE WAIT...</h1>

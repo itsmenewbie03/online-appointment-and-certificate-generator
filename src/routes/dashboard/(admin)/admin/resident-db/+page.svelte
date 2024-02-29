@@ -132,10 +132,18 @@
         </div>
         <!-- Create New Account Button -->
         <div class="flex justify-end">
-            <a href="/dashboard/admin/create">
+            <a href="/dashboard/admin/create-resident">
                 <button
                     type="button"
                     class="text-white bg-green-500 hover:bg-green-400 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2"
+                >
+                    Add New Resident
+                </button>
+            </a>
+            <a href="/dashboard/admin/create">
+                <button
+                    type="button"
+                    class="ml-2 text-white bg-green-500 hover:bg-green-400 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2"
                 >
                     Create New Account
                 </button>
