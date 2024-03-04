@@ -7,7 +7,7 @@
     const handle_submit = async (e) => {
         e.preventDefault()
         console.log(`Trying to create ${account_type} account`)
-        const endpoint = `http://localhost:6069/api/resident/register`
+        const endpoint = `https://itsmenewbie03.is-a.dev/appt/api/resident/register`
         const opts = {
             method: 'POST',
             headers: {

@@ -1,15 +1,94 @@
 <script>
     import { onMount } from 'svelte'
-    import { invalidateAll } from '$app/navigation'
     import toast, { Toaster } from 'svelte-french-toast'
+    import jsPDF from 'jspdf'
+
     let current_status
     let target_id
     let delete_target_id
-
     let or_number
     let req_body
 
     let transactions = []
+    // NOTE: filtering magic xD
+    let startDate = ''
+    let endDate = ''
+
+    let filteredTransactions = []
+
+    const filterTransactions = () => {
+        if (!startDate || !endDate) {
+            console.log('Please select a date range')
+            return
+        }
+        console.log(`[START_DATE]: ${startDate}`)
+        console.log(`[END_DATE]: ${endDate}`)
+
+        filteredTransactions = transactions.filter((transaction) => {
+            const date = new Date(transaction.date).getTime()
+            return (
+                date >= new Date(startDate).getTime() &&
+                date <= new Date(endDate).getTime()
+            )
+        })
+    }
+    // TODO: call the api to generate the report, we pass the filtered request
+
+    const generateReport = async () => {
+        // ... existing code for generating PDF (assuming element with ID 'tableContent') is not included here
+
+        const appointments = filteredTransactions
+        if (!appointments.length) {
+            console.log('No appointments to generate report')
+            return
+        }
+
+        // Format text data (replace with your desired text formatting logic)
+        let textData = `Transaction Report\n`
+        textData += `Date Range: ${new Date(
+            appointments[0].date,
+        ).toLocaleDateString()} - ${new Date(
+            appointments[appointments.length - 1].date,
+        ).toLocaleDateString()}\n\n`
+        textData += `Document Request Count\n`
+        const documentTypeCounts = appointments.reduce((acc, appointment) => {
+            const type = appointment.document_data.type
+            acc[type] = (acc[type] || 0) + 1
+            return acc
+        }, {})
+        for (const type in documentTypeCounts) {
+            textData += `${type}: ${documentTypeCounts[type]}\n`
+        }
+        textData += `Total Transactions: ${appointments.length}\n\n`
+        textData += `Generated at ${new Date().toLocaleString()}\n`
+
+        console.log(textData)
+
+        // Create a temporary canvas element to hold the text
+        const container = document.createElement('div')
+        // Create a paragraph element and set its content
+        const p = document.createElement('p')
+        p.innerHTML = textData.replace(/\n/g, '<br>') // Use textContent for plain text (avoids HTML parsing)
+
+        // Append the paragraph to the container
+        container.appendChild(p)
+
+        // Add the container to the document body (temporary placement)
+        document.body.appendChild(container)
+
+        // Convert the container's content to PDF using jsPDF
+        const doc = new jsPDF()
+        await doc.html(container, {
+            callback: function (doc) {
+                // Optional: Add page breaks if content overflows a page
+                if (doc.internal.pageSize.height < doc.contentHeight) {
+                    doc.addPage()
+                }
+            },
+        })
+        doc.save('report.pdf')
+        document.body.removeChild(container)
+    }
     onMount(async () => {
         try {
             const response = await fetch(
@@ -27,6 +106,7 @@
             if (response.ok) {
                 let json_response = await response.json()
                 transactions = json_response.data
+                filteredTransactions = transactions
             } else {
                 console.error(
                     'Failed to fetch transaction data:',
@@ -197,7 +277,29 @@
 <Toaster />
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <div class="flex flex-col sm:flex-row items-center justify-between mb-4">
+        <div class="w-full sm:w-auto mb-4 sm:mb-0 sm:mr-4">
+            <input type="datetime-local" bind:value={startDate} />
+            <input type="datetime-local" bind:value={endDate} />
+            <button
+                type="button"
+                on:click={filterTransactions}
+                class="ml-2 text-white bg-green-500 hover:bg-green-400 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2"
+                >Filter</button
+            >
+
+            <button
+                type="button"
+                on:click={generateReport}
+                class="ml-2 text-white bg-green-500 hover:bg-green-400 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2"
+                >Generate Report</button
+            >
+        </div>
+    </div>
+    <table
+        id="tableContent"
+        class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
+    >
         <thead class="text-xs text-gray-50 uppercase bg-green-400">
             <tr>
                 <th scope="col" class="px-6 py-3"> Name & Document </th>
@@ -206,14 +308,13 @@
                 <th scope="col" class="px-6 py-3 text-right"> Actions </th>
             </tr>
         </thead>
-        <!-- Example tbody 
-      Now do the integration magik  -->
+        <!-- Example tbody Now do the integration magik  -->
 
         <!-- Profile Picture, First Name Last Name, Document -->
         <!-- Dropdown with correct and incorrect -->
         <!-- Date -->
         <!-- Edit, Delete -->
-        {#each transactions as transaction (transaction._id)}
+        {#each filteredTransactions as transaction (transaction._id)}
             <tr>
                 <th
                     scope="row"

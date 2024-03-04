@@ -115,7 +115,8 @@
             loaded = true
             // update the access token in localStorage
             localStorage.setItem('access_token', body.access_token)
-            goto(`/`)
+            // NOTE: do a reload when the access token is updated
+            location.reload()
             return
         }
         loaded = true
