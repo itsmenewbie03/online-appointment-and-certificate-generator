@@ -4,9 +4,12 @@
 
     let account_type
     let info = {}
+    let period_of_residency_value
+    let period_of_residency_unit
 
     const handle_submit = async (e) => {
         e.preventDefault()
+        info.period_of_residency = `${period_of_residency_value} ${period_of_residency_unit}`
         console.log(`Trying to create ${account_type} account`)
         const endpoint = `https://itsmenewbie03.is-a.dev/appt/api/resident/register`
         const opts = {
@@ -83,14 +86,31 @@
                     />
                 </div>
                 <div class="mb-2">
-                    <input
-                        type="text"
-                        id="residency"
-                        bind:value={info.period_of_residency}
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5"
-                        placeholder="Period of Residency*"
-                        required
-                    />
+                    <div class="flex">
+                        <input
+                            type="number"
+                            id="residency-value"
+                            bind:value={period_of_residency_value}
+                            class="form-input rounded-l-md bg-gray-50 border border-gray-300 text-gray-900"
+                            placeholder="Period of residency*"
+                            min="1"
+                            required
+                        />
+                        <select
+                            id="residency-unit"
+                            bind:value={period_of_residency_unit}
+                            class="form-select rounded-r-md bg-gray-50 border border-gray-300 text-gray-900 w-full"
+                            required
+                        >
+                            <option value="" disabled selected
+                                >Select Unit*</option
+                            >
+                            <option value="days">Day(s)</option>
+                            <option value="weeks">Week(s)</option>
+                            <option value="months">Month(s)</option>
+                            <option value="years">Year(s)</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div>
@@ -129,6 +149,8 @@
                         bind:value={info.phone_number}
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5"
                         placeholder="Phone Number*"
+                        minlength="11"
+                        maxlength="13"
                         required
                     />
                 </div>

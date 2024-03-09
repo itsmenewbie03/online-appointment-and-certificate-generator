@@ -1,33 +1,25 @@
 <script>
     import toast, { Toaster } from 'svelte-french-toast'
-    import Radio from '$components/Radio.svelte'
 
-    let account_type
     let email
     let info = {}
-    const options = [
-        {
-            value: 'user',
-            label: 'User',
-        },
-        {
-            value: 'employee',
-            label: 'Employee',
-        },
-    ]
+    let period_of_residency_value
+    let period_of_residency_unit
+
     let password = ''
     let confirm_password = ''
     let passwordError = ''
 
     const handle_submit = async (e) => {
         e.preventDefault()
+
         validatePassword()
         if (passwordError) {
             toast.error('Password does not meet the required conditions.')
             return
         }
-        console.log(`Trying to create ${account_type} account`)
-        const endpoint = `https://itsmenewbie03.is-a.dev/appt/api/${account_type}/register`
+        info.period_of_residency = `${period_of_residency_value} ${period_of_residency_unit}`
+        const endpoint = `https://itsmenewbie03.is-a.dev/appt/api/employee/register`
         const opts = {
             method: 'POST',
             headers: {
@@ -78,7 +70,7 @@
     class="grid place-items-center mt-10 py-[60px] px-12 bg-white border border-gray-200 rounded-lg shadow"
 >
     <div class="">
-               <form class="grid grid-cols-2 gap-6" on:submit={handle_submit}>
+        <form class="grid grid-cols-2 gap-6" on:submit={handle_submit}>
             <div>
                 <div class="mb-2">
                     <label for="">First Name:</label>
@@ -131,33 +123,35 @@
                     />
                 </div>
                 <div class="mb-2">
-                    <label for="residency-value" class="block mb-1">Period of Residency:</label>
+                    <label for="residency-value" class="block mb-1"
+                        >Period of Residency:</label
+                    >
                     <div class="flex">
                         <input
                             type="number"
                             id="residency-value"
-                            bind:value={info.period_of_residency_value}
+                            bind:value={period_of_residency_value}
                             class="form-input rounded-l-md bg-gray-50 border border-gray-300 text-gray-900"
                             placeholder="Value*"
+                            min="1"
                             required
                         />
-                        <select 
-                            id="residency-unit" 
-                            bind:value={info.period_of_residency_unit} 
+                        <select
+                            id="residency-unit"
+                            bind:value={period_of_residency_unit}
                             class="form-select rounded-r-md bg-gray-50 border border-gray-300 text-gray-900"
                             required
                         >
-                            <option value="">Select Unit*</option>
-                            <option value="seconds">Seconds</option>
-                            <option value="minutes">Minutes</option>
-                            <option value="hours">Hours</option>
-                            <option value="days">Days</option>
-                            <option value="weeks">Weeks</option>
-                            <option value="months">Months</option>
-                            <option value="years">Years</option>
+                            <option value="" disabled selected
+                                >Select Unit*</option
+                            >
+                            <option value="days">Day(s)</option>
+                            <option value="weeks">Week(s)</option>
+                            <option value="months">Month(s)</option>
+                            <option value="years">Year(s)</option>
                         </select>
                     </div>
-                   </div>  
+                </div>
                 <div class="mb-2">
                     <label for="">Password:</label>
                     <input
@@ -207,7 +201,7 @@
                     />
                 </div>
                 <div class="mb-2">
-                    <label for="">Email:</label>
+                    <label for="">Address:</label>
                     <input
                         type="text"
                         id="address"
@@ -225,6 +219,8 @@
                         bind:value={info.phone_number}
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5"
                         placeholder="Phone Number*"
+                        minlength="11"
+                        maxlength="13"
                         required
                     />
                 </div>
@@ -256,6 +252,3 @@
         </form>
     </div>
 </div>
-
-
-
