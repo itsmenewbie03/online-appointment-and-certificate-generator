@@ -137,14 +137,14 @@
                             type="number"
                             id="residency-value"
                             bind:value={info.period_of_residency_value}
-                            class="form-input rounded-l-md"
+                            class="form-input rounded-l-md bg-gray-50 border border-gray-300 text-gray-900"
                             placeholder="Value*"
                             required
                         />
                         <select 
                             id="residency-unit" 
                             bind:value={info.period_of_residency_unit} 
-                            class="form-select rounded-r-md"
+                            class="form-select rounded-r-md bg-gray-50 border border-gray-300 text-gray-900"
                             required
                         >
                             <option value="">Select Unit*</option>
