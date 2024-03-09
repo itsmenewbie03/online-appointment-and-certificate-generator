@@ -1,5 +1,6 @@
 <script>
     import toast, { Toaster } from 'svelte-french-toast'
+    import { goto } from '$app/navigation'
 
     let account_type
     let info = {}
@@ -20,7 +21,9 @@
         }
         const resp = await fetch(endpoint, opts).then((res) => res.json())
         toast.success(resp.message)
-        // NOTE: this shoule be displayed in the use
+        // Redirect back to the main page
+        goto('/dashboard/admin/resident-db')
+        // NOTE: this should be displayed in the console
         console.log(`REGISTER ENDPOINT RESPONSE: ${JSON.stringify(resp)}`)
     }
 </script>
