@@ -32,10 +32,21 @@
                 info: info,
             }),
         }
-        const resp = await fetch(endpoint, opts).then((res) => res.json())
-        toast.success(resp.message)
-        // NOTE: this shoule be displayed in the use
-        console.log(`REGISTER ENDPOINT RESPONSE: ${JSON.stringify(resp)}`)
+        try {
+            const resp = await fetch(endpoint, opts);
+            const data = await resp.json();
+            if (!resp.ok) {
+                toast.error(data.message);
+            } else {
+                toast.success(data.message);
+            }
+                // NOTE: this shoule be displayed in the use
+                console.log(`REGISTER ENDPOINT RESPONSE: ${JSON.stringify(resp)}`)
+        } catch (error) {
+            console.error('Error:', error);
+            toast.error('An error occurred. Please try again later.');
+        }
+
     }
 
     function handlePasswordInput(event) {
