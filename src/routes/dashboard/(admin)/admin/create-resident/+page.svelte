@@ -20,7 +20,9 @@
         }
         const resp = await fetch(endpoint, opts).then((res) => res.json())
         toast.success(resp.message)
-        // NOTE: this shoule be displayed in the use
+        // Redirect back to the main page
+        window.location.href = '/dashboard/admin/resident-db'
+        // NOTE: this should be displayed in the console
         console.log(`REGISTER ENDPOINT RESPONSE: ${JSON.stringify(resp)}`)
     }
 </script>
