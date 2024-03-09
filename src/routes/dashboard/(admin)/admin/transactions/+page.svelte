@@ -189,7 +189,7 @@
         const resp = await fetch(endpoint, opts).then((res) => res.json())
         // TODO: make this display in the frontend pretty xD
         console.log(`UPDATE DIZZ: ${resp.message}`)
-        transactions = transactions.map((transaction) =>
+        filteredTransactions = filteredTransactions.map((transaction) =>
             transaction._id === target_id
                 ? { ...transaction, status: current_status }
                 : transaction,
@@ -213,7 +213,7 @@
         const resp = await fetch(endpoint, opts).then((res) => res.json())
         // TODO: make this display in the frontend pretty xD
         console.log(`DELETE DIZZ: ${resp.message}`)
-        transactions = transactions.filter(
+        filteredTransactions = filteredTransactions.filter(
             (transaction) => transaction._id !== delete_target_id,
         )
         // await invalidateAll();
