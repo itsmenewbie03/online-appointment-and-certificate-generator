@@ -78,18 +78,10 @@
     class="grid place-items-center mt-10 py-[60px] px-12 bg-white border border-gray-200 rounded-lg shadow"
 >
     <div class="">
-        <div>
-            <!-- NOTE: PLEASE CONFIGURE THE STYLE FOR THIS  -->
-            <Radio
-                {options}
-                fontSize={16}
-                legend="Account Type"
-                bind:userSelected={account_type}
-            />
-        </div>
-        <form class="grid grid-cols-2 gap-6" on:submit={handle_submit}>
+               <form class="grid grid-cols-2 gap-6" on:submit={handle_submit}>
             <div>
                 <div class="mb-2">
+                    <label for="">First Name:</label>
                     <input
                         type="text"
                         id="first_name"
@@ -100,6 +92,7 @@
                     />
                 </div>
                 <div class="mb-2">
+                    <label for="">Last Name:</label>
                     <input
                         type="text"
                         id="last_name"
@@ -110,6 +103,7 @@
                     />
                 </div>
                 <div class="mb-2">
+                    <label for="">Gender:</label>
                     <select
                         bind:value={info.gender}
                         id="genders"
@@ -126,6 +120,7 @@
                     </select>
                 </div>
                 <div class="mb-2">
+                    <label for="">Birthdate:</label>
                     <input
                         type="date"
                         id="birth"
@@ -136,16 +131,35 @@
                     />
                 </div>
                 <div class="mb-2">
+                    <label for="">Period of Residency:</label>
                     <input
-                        type="text"
-                        id="residency"
-                        bind:value={info.period_of_residency}
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5"
-                        placeholder="Period of Residency*"
+                        type="number"
+                        id="residency-value"
+                        bind:value={info.period_of_residency_value}
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5"
+                        placeholder="Value*"
                         required
                     />
                 </div>
                 <div class="mb-2">
+                    <select 
+                        id="residency-unit" 
+                        bind:value={info.period_of_residency_unit} 
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5"
+                        required
+                    >
+                        <option value="">Select Unit*</option>
+                        <option value="seconds">Seconds</option>
+                        <option value="minutes">Minutes</option>
+                        <option value="hours">Hours</option>
+                        <option value="days">Days</option>
+                        <option value="weeks">Weeks</option>
+                        <option value="months">Months</option>
+                        <option value="years">Years</option>
+                    </select> 
+                </div>  
+                <div class="mb-2">
+                    <label for="">Password:</label>
                     <input
                         type="password"
                         id="password"
@@ -162,6 +176,7 @@
             </div>
             <div>
                 <div class="mb-2">
+                    <label for="">Middle Name:</label>
                     <input
                         type="text"
                         id="middle_name"
@@ -171,6 +186,7 @@
                     />
                 </div>
                 <div class="mb-2">
+                    <label for="">Suffix:</label>
                     <input
                         type="text"
                         id="suffix"
@@ -180,6 +196,7 @@
                     />
                 </div>
                 <div class="mb-2">
+                    <label for="">Email:</label>
                     <input
                         type="text"
                         id="email"
@@ -190,6 +207,7 @@
                     />
                 </div>
                 <div class="mb-2">
+                    <label for="">Email:</label>
                     <input
                         type="text"
                         id="address"
@@ -200,6 +218,7 @@
                     />
                 </div>
                 <div class="mb-2">
+                    <label for="">Phone Number:</label>
                     <input
                         type="text"
                         id="contact"
@@ -210,6 +229,7 @@
                     />
                 </div>
                 <div class="mb-2">
+                    <label for="">Confirm Password:</label>
                     <input
                         type="password"
                         id="password"
