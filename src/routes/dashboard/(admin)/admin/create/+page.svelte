@@ -78,7 +78,7 @@
     class="grid place-items-center mt-10 py-[60px] px-12 bg-white border border-gray-200 rounded-lg shadow"
 >
     <div class="">
-               <form class="grid grid-cols-2 gap-6" on:submit={handle_submit}>
+        <form class="grid grid-cols-2 gap-6" on:submit={handle_submit}>
             <div>
                 <div class="mb-2">
                     <label for="">First Name:</label>
@@ -131,7 +131,9 @@
                     />
                 </div>
                 <div class="mb-2">
-                    <label for="residency-value" class="block mb-1">Period of Residency:</label>
+                    <label for="residency-value" class="block mb-1"
+                        >Period of Residency:</label
+                    >
                     <div class="flex">
                         <input
                             type="number"
@@ -141,9 +143,9 @@
                             placeholder="Value*"
                             required
                         />
-                        <select 
-                            id="residency-unit" 
-                            bind:value={info.period_of_residency_unit} 
+                        <select
+                            id="residency-unit"
+                            bind:value={info.period_of_residency_unit}
                             class="form-select rounded-r-md bg-gray-50 border border-gray-300 text-gray-900"
                             required
                         >
@@ -157,7 +159,7 @@
                             <option value="years">Years</option>
                         </select>
                     </div>
-                   </div>  
+                </div>
                 <div class="mb-2">
                     <label for="">Password:</label>
                     <input
@@ -256,6 +258,3 @@
         </form>
     </div>
 </div>
-
-
-
