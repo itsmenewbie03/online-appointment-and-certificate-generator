@@ -131,33 +131,33 @@
                     />
                 </div>
                 <div class="mb-2">
-                    <label for="">Period of Residency:</label>
-                    <input
-                        type="number"
-                        id="residency-value"
-                        bind:value={info.period_of_residency_value}
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5"
-                        placeholder="Value*"
-                        required
-                    />
-                </div>
-                <div class="mb-2">
-                    <select 
-                        id="residency-unit" 
-                        bind:value={info.period_of_residency_unit} 
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5"
-                        required
-                    >
-                        <option value="">Select Unit*</option>
-                        <option value="seconds">Seconds</option>
-                        <option value="minutes">Minutes</option>
-                        <option value="hours">Hours</option>
-                        <option value="days">Days</option>
-                        <option value="weeks">Weeks</option>
-                        <option value="months">Months</option>
-                        <option value="years">Years</option>
-                    </select> 
-                </div>  
+                    <label for="residency-value" class="block mb-1">Period of Residency:</label>
+                    <div class="flex">
+                        <input
+                            type="number"
+                            id="residency-value"
+                            bind:value={info.period_of_residency_value}
+                            class="form-input rounded-l-md"
+                            placeholder="Value*"
+                            required
+                        />
+                        <select 
+                            id="residency-unit" 
+                            bind:value={info.period_of_residency_unit} 
+                            class="form-select rounded-r-md"
+                            required
+                        >
+                            <option value="">Select Unit*</option>
+                            <option value="seconds">Seconds</option>
+                            <option value="minutes">Minutes</option>
+                            <option value="hours">Hours</option>
+                            <option value="days">Days</option>
+                            <option value="weeks">Weeks</option>
+                            <option value="months">Months</option>
+                            <option value="years">Years</option>
+                        </select>
+                    </div>
+                   </div>  
                 <div class="mb-2">
                     <label for="">Password:</label>
                     <input
@@ -256,3 +256,6 @@
         </form>
     </div>
 </div>
+
+
+
