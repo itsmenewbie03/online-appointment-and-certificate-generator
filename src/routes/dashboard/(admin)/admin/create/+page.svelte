@@ -41,6 +41,9 @@
                 toast.error(data.message)
             } else {
                 toast.success(data.message)
+                // NOTE: enale the button again
+                submit_btn.disabled = false
+                goto('/dashboard/admin/resident-db')
             }
             // NOTE: this shoule be displayed in the use
             console.log(`REGISTER ENDPOINT RESPONSE: ${JSON.stringify(resp)}`)
