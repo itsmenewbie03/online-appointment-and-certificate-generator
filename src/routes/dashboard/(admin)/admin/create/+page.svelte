@@ -10,14 +10,16 @@
     let confirm_password = ''
     let passwordError = ''
 
+    let submit_btn
+
     const handle_submit = async (e) => {
         e.preventDefault()
-
         validatePassword()
         if (passwordError) {
             toast.error('Password does not meet the required conditions.')
             return
         }
+        submit_btn.disabled = true
         info.period_of_residency = `${period_of_residency_value} ${period_of_residency_unit}`
         const endpoint = `https://itsmenewbie03.is-a.dev/appt/api/employee/register`
         const opts = {
@@ -46,6 +48,7 @@
             console.error('Error:', error)
             toast.error('An error occurred. Please try again later.')
         }
+        submit_btn.disabled = false
     }
 
     function handlePasswordInput(event) {
@@ -257,7 +260,7 @@
                 id="create-account"
                 type="submit"
                 class="text-white bg-green-400 hover:bg-green-500 focus:outline-none focus:ring-4 focus:ring-green-600 font-medium rounded-full text-sm px-5 py-2.5 text-center ml-16 mb-2"
-                >Create Account</button
+                bind:this={submit_btn}>Create Account</button
             >
         </form>
     </div>

@@ -6,9 +6,11 @@
     let info = {}
     let period_of_residency_value
     let period_of_residency_unit
+    let submit_btn
 
     const handle_submit = async (e) => {
         e.preventDefault()
+        submit_btn.disabled = true
         info.period_of_residency = `${period_of_residency_value} ${period_of_residency_unit}`
         console.log(`Trying to create ${account_type} account`)
         const endpoint = `https://itsmenewbie03.is-a.dev/appt/api/resident/register`
@@ -24,7 +26,9 @@
         }
         const resp = await fetch(endpoint, opts).then((res) => res.json())
         toast.success(resp.message)
+        submit_btn.disabled = false
         // Redirect back to the main page
+        // WARN: while implementing the better response please don't redirect if there's an error
         goto('/dashboard/admin/resident-db')
         // NOTE: this should be displayed in the console
         console.log(`REGISTER ENDPOINT RESPONSE: ${JSON.stringify(resp)}`)
@@ -166,7 +170,7 @@
                 id="create-account"
                 type="submit"
                 class="text-white bg-green-400 hover:bg-green-500 focus:outline-none focus:ring-4 focus:ring-green-600 font-medium rounded-full text-sm px-5 py-2.5 text-center ml-16 mb-2"
-                >Submit</button
+                bind:this={submit_btn}>Submit</button
             >
         </form>
     </div>
