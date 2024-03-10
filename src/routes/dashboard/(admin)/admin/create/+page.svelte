@@ -33,20 +33,19 @@
             }),
         }
         try {
-            const resp = await fetch(endpoint, opts);
-            const data = await resp.json();
+            const resp = await fetch(endpoint, opts)
+            const data = await resp.json()
             if (!resp.ok) {
-                toast.error(data.message);
+                toast.error(data.message)
             } else {
-                toast.success(data.message);
+                toast.success(data.message)
             }
-                // NOTE: this shoule be displayed in the use
-                console.log(`REGISTER ENDPOINT RESPONSE: ${JSON.stringify(resp)}`)
+            // NOTE: this shoule be displayed in the use
+            console.log(`REGISTER ENDPOINT RESPONSE: ${JSON.stringify(resp)}`)
         } catch (error) {
-            console.error('Error:', error);
-            toast.error('An error occurred. Please try again later.');
+            console.error('Error:', error)
+            toast.error('An error occurred. Please try again later.')
         }
-
     }
 
     function handlePasswordInput(event) {
@@ -150,7 +149,7 @@
                         <select
                             id="residency-unit"
                             bind:value={period_of_residency_unit}
-                            class="form-select rounded-r-md bg-gray-50 border border-gray-300 text-gray-900"
+                            class="w-full form-select rounded-r-md bg-gray-50 border border-gray-300 text-gray-900"
                             required
                         >
                             <option value="" disabled selected
