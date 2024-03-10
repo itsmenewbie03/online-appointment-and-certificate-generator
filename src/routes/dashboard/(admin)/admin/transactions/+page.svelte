@@ -292,7 +292,7 @@
                 type="button"
                 on:click={generateReport}
                 class="ml-2 text-white bg-green-500 hover:bg-green-400 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2"
-                >Generate Report</button
+                >Generate & Download Report</button
             >
         </div>
     </div>
