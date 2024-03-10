@@ -1,6 +1,8 @@
 <script>
     import { onMount } from 'svelte'
     import toast, { Toaster } from 'svelte-french-toast'
+    let period_of_residency_unit
+    let period_of_residency_value
     let info = {}
     let documents = []
     let document_id
@@ -22,6 +24,8 @@
     const handle_submit = async (event) => {
         event.preventDefault()
         console.log('[INIT]: WALKIN SUBMITTED')
+
+        info.period_of_residency = `${period_of_residency_value} ${period_of_residency_unit}`
         const endpoint = `https://itsmenewbie03.is-a.dev/appt/api/documents/walkin/generate`
         const opts = {
             method: 'POST',
@@ -151,14 +155,31 @@
                     />
                 </div>
                 <div class="mb-2">
-                    <input
-                        type="text"
-                        id="residency"
-                        bind:value={info.period_of_residency}
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5"
-                        placeholder="Period of Residency*"
-                        required
-                    />
+                    <div class="flex w-full">
+                        <input
+                            type="number"
+                            id="residency-value"
+                            bind:value={period_of_residency_value}
+                            class="form-input rounded-l-md bg-gray-50 border border-gray-300 text-gray-900"
+                            placeholder="Period of Residency*"
+                            min="1"
+                            required
+                        />
+                        <select
+                            id="residency-unit"
+                            bind:value={period_of_residency_unit}
+                            class="form-select rounded-r-md bg-gray-50 border border-gray-300 text-gray-900 w-full"
+                            required
+                        >
+                            <option value="" disabled selected
+                                >Select Unit*</option
+                            >
+                            <option value="days">Day(s)</option>
+                            <option value="weeks">Week(s)</option>
+                            <option value="months">Month(s)</option>
+                            <option value="years">Year(s)</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div>
@@ -197,6 +218,8 @@
                         bind:value={info.phone_number}
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5"
                         placeholder="Phone Number*"
+                        minlength="11"
+                        maxlength="13"
                         required
                     />
                 </div>
