@@ -338,7 +338,7 @@
                         href="#"
                         on:click={show_generate_modal(transaction)}
                         class="font-medium pr-2 text-green-600 dark:text-green-400 hover:underline"
-                        >Generate</a
+                        >Download</a
                     >
                     <a
                         on:click={() => {
