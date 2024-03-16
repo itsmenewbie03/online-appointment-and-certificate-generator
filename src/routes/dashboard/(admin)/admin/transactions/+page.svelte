@@ -34,60 +34,86 @@
     }
     // TODO: call the api to generate the report, we pass the filtered request
 
+    // const generateReport = async () => {
+    //     // ... existing code for generating PDF (assuming element with ID 'tableContent') is not included here
+    //
+    //     const appointments = filteredTransactions
+    //     if (!appointments.length) {
+    //         console.log('No appointments to generate report')
+    //         return
+    //     }
+    //
+    //     // Format text data (replace with your desired text formatting logic)
+    //     let textData = `Transaction Report\n`
+    //     textData += `Date Range: ${new Date(
+    //         appointments[0].date,
+    //     ).toLocaleDateString()} - ${new Date(
+    //         appointments[appointments.length - 1].date,
+    //     ).toLocaleDateString()}\n\n`
+    //     textData += `Document Request Count\n`
+    //     const documentTypeCounts = appointments.reduce((acc, appointment) => {
+    //         const type = appointment.document_data.type
+    //         acc[type] = (acc[type] || 0) + 1
+    //         return acc
+    //     }, {})
+    //     for (const type in documentTypeCounts) {
+    //         textData += `${type}: ${documentTypeCounts[type]}\n`
+    //     }
+    //     textData += `Total Transactions: ${appointments.length}\n\n`
+    //     textData += `Generated at ${new Date().toLocaleString()}\n`
+    //
+    //     console.log(textData)
+    //
+    //     // Create a temporary canvas element to hold the text
+    //     const container = document.createElement('div')
+    //     // Create a paragraph element and set its content
+    //     const p = document.createElement('p')
+    //     p.innerHTML = textData.replace(/\n/g, '<br>') // Use textContent for plain text (avoids HTML parsing)
+    //
+    //     // Append the paragraph to the container
+    //     container.appendChild(p)
+    //
+    //     // Add the container to the document body (temporary placement)
+    //     document.body.appendChild(container)
+    //
+    //     // Convert the container's content to PDF using jsPDF
+    //     const doc = new jsPDF()
+    //     await doc.html(container, {
+    //         callback: function (doc) {
+    //             // Optional: Add page breaks if content overflows a page
+    //             if (doc.internal.pageSize.height < doc.contentHeight) {
+    //                 doc.addPage()
+    //             }
+    //         },
+    //     })
+    //     doc.save('report.pdf')
+    //     document.body.removeChild(container)
+    // }
+
     const generateReport = async () => {
-        // ... existing code for generating PDF (assuming element with ID 'tableContent') is not included here
-
-        const appointments = filteredTransactions
-        if (!appointments.length) {
-            console.log('No appointments to generate report')
-            return
-        }
-
-        // Format text data (replace with your desired text formatting logic)
-        let textData = `Transaction Report\n`
-        textData += `Date Range: ${new Date(
-            appointments[0].date,
-        ).toLocaleDateString()} - ${new Date(
-            appointments[appointments.length - 1].date,
-        ).toLocaleDateString()}\n\n`
-        textData += `Document Request Count\n`
-        const documentTypeCounts = appointments.reduce((acc, appointment) => {
-            const type = appointment.document_data.type
-            acc[type] = (acc[type] || 0) + 1
-            return acc
-        }, {})
-        for (const type in documentTypeCounts) {
-            textData += `${type}: ${documentTypeCounts[type]}\n`
-        }
-        textData += `Total Transactions: ${appointments.length}\n\n`
-        textData += `Generated at ${new Date().toLocaleString()}\n`
-
-        console.log(textData)
-
-        // Create a temporary canvas element to hold the text
-        const container = document.createElement('div')
-        // Create a paragraph element and set its content
-        const p = document.createElement('p')
-        p.innerHTML = textData.replace(/\n/g, '<br>') // Use textContent for plain text (avoids HTML parsing)
-
-        // Append the paragraph to the container
-        container.appendChild(p)
-
-        // Add the container to the document body (temporary placement)
-        document.body.appendChild(container)
-
-        // Convert the container's content to PDF using jsPDF
-        const doc = new jsPDF()
-        await doc.html(container, {
-            callback: function (doc) {
-                // Optional: Add page breaks if content overflows a page
-                if (doc.internal.pageSize.height < doc.contentHeight) {
-                    doc.addPage()
-                }
+        const endpoint =
+            'https://itsmenewbie03.is-a.dev/appt/api/transactions/reports/generate'
+        const opts = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('access_token')}`,
             },
+            body: JSON.stringify({
+                start_date: startDate,
+                end_date: endDate,
+            }),
+        }
+        const resp = await fetch(endpoint, opts).then(async (res) => {
+            return { status: res.status, body: await res.json() }
         })
-        doc.save('report.pdf')
-        document.body.removeChild(container)
+        const { status, body } = resp
+        const _alert = status === 200 ? toast.success : toast.error
+        _alert(body.message)
+        download(
+            body.document,
+            `Report_${startDate.split('T')[0]}_${endDate.split('T')[0]}.docx`,
+        )
     }
     onMount(async () => {
         try {
