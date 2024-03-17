@@ -5,8 +5,28 @@
     let period_of_residency_value
     let info = {}
     let documents = []
+    let residents = []
     let document_id
     let or_number
+    let read_only = false
+
+    const select_resident = (event) => {
+        const resident_id = event.target.value
+        if (resident_id === 'new_resident') {
+            read_only = false
+            info = {}
+            return
+        }
+        const resident = residents.find(
+            (resident) => resident._id === resident_id,
+        )
+        const [value, unit] = resident.period_of_residency.split(' ')
+        period_of_residency_unit = unit
+        period_of_residency_value = value
+        info = resident
+        info.date_of_birth = resident.date_of_birth.split('T')[0]
+        read_only = true
+    }
 
     onMount(async () => {
         const endpoint =
@@ -20,6 +40,10 @@
         const resp = await fetch(endpoint, opts).then((res) => res.json())
         documents = resp.data
         console.log(`WE GOT [DOCUMENT_LIST]: ${JSON.stringify(resp)}`)
+        const endpoint2 = `https://itsmenewbie03.is-a.dev/appt/api/data/resident/list`
+        const resp2 = await fetch(endpoint2, opts).then((res) => res.json())
+        residents = resp2.data
+        console.log(`WE GOT [RESIDENT_LIST]: ${JSON.stringify(resp2)}`)
     })
     const handle_submit = async (event) => {
         event.preventDefault()
@@ -91,7 +115,25 @@
             on:submit={handle_submit}
         >
             <div>
-                <div>
+                <div class="mb-2">
+                    <select
+                        id="dropdown1"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5"
+                        on:change={select_resident}
+                    >
+                        <option value="" disabled selected
+                            >Select a resident...</option
+                        >
+                        <option value="new_resident">Add new resident</option>
+                        {#each residents as resident}
+                            <option value={resident._id}
+                                >{`${resident.first_name} ${resident.last_name}`}</option
+                            >
+                        {/each}
+                    </select>
+                </div>
+
+                <div class="mb-2">
                     <select
                         bind:value={document_id}
                         id="dropdown1"
@@ -113,6 +155,7 @@
                         type="text"
                         id="first_name"
                         bind:value={info.first_name}
+                        readonly={read_only}
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5"
                         placeholder="First Name*"
                         required
@@ -123,6 +166,7 @@
                         type="text"
                         id="last_name"
                         bind:value={info.last_name}
+                        readonly={read_only}
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5"
                         placeholder="Last Name*"
                         required
@@ -131,6 +175,7 @@
                 <div class="mb-2">
                     <select
                         bind:value={info.gender}
+                        disabled={read_only}
                         id="genders"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required
@@ -148,38 +193,12 @@
                     <input
                         type="date"
                         id="birth"
+                        readonly={read_only}
                         bind:value={info.date_of_birth}
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5"
                         placeholder="Date of Birth*"
                         required
                     />
-                </div>
-                <div class="mb-2">
-                    <div class="flex w-full">
-                        <input
-                            type="number"
-                            id="residency-value"
-                            bind:value={period_of_residency_value}
-                            class="form-input rounded-l-md bg-gray-50 border border-gray-300 text-gray-900"
-                            placeholder="Period of Residency*"
-                            min="1"
-                            required
-                        />
-                        <select
-                            id="residency-unit"
-                            bind:value={period_of_residency_unit}
-                            class="form-select rounded-r-md bg-gray-50 border border-gray-300 text-gray-900 w-full"
-                            required
-                        >
-                            <option value="" disabled selected
-                                >Select Unit*</option
-                            >
-                            <option value="days">Day(s)</option>
-                            <option value="weeks">Week(s)</option>
-                            <option value="months">Month(s)</option>
-                            <option value="years">Year(s)</option>
-                        </select>
-                    </div>
                 </div>
             </div>
             <div>
@@ -188,6 +207,7 @@
                         type="text"
                         id="middle_name"
                         bind:value={info.middle_name}
+                        readonly={read_only}
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5"
                         placeholder="Middle Name"
                     />
@@ -197,6 +217,7 @@
                         type="text"
                         id="suffix"
                         bind:value={info.name_suffix}
+                        readonly={read_only}
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5"
                         placeholder="Suffix"
                     />
@@ -206,6 +227,7 @@
                         type="text"
                         id="address"
                         bind:value={info.address}
+                        readonly={read_only}
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5"
                         placeholder="Address*"
                         required
@@ -216,6 +238,7 @@
                         type="text"
                         id="contact"
                         bind:value={info.phone_number}
+                        readonly={read_only}
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5"
                         placeholder="Phone Number*"
                         minlength="11"
@@ -231,6 +254,36 @@
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5"
                         placeholder="OR NUMBER"
                     />
+                </div>
+
+                <div class="mb-2">
+                    <div class="flex w-full">
+                        <input
+                            type="number"
+                            id="residency-value"
+                            bind:value={period_of_residency_value}
+                            readonly={read_only}
+                            class="form-input rounded-l-md bg-gray-50 border border-gray-300 text-gray-900"
+                            placeholder="Period of Residency*"
+                            min="1"
+                            required
+                        />
+                        <select
+                            id="residency-unit"
+                            bind:value={period_of_residency_unit}
+                            disabled={read_only}
+                            class="form-select rounded-r-md bg-gray-50 border border-gray-300 text-gray-900 w-full"
+                            required
+                        >
+                            <option value="" disabled selected
+                                >Select Unit*</option
+                            >
+                            <option value="days">Day(s)</option>
+                            <option value="weeks">Week(s)</option>
+                            <option value="months">Month(s)</option>
+                            <option value="years">Year(s)</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
