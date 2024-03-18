@@ -5,6 +5,9 @@
     let document_type
     let file
     let price
+    let paid
+
+    $: document_type, (paid = document_type === 'paid')
 
     const options = [
         {
@@ -59,7 +62,8 @@
                 required_data: required_data,
                 document_name: document_name,
                 document_type: document_type,
-                price: price,
+                // NOTE: if free set price to zero
+                price: paid ? price : 0,
             }
 
             try {
@@ -123,16 +127,17 @@
                         id="description"
                         required
                     />
-
-                    <label for="description">Price</label>
-                    <input
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        type="number"
-                        min="0"
-                        bind:value={price}
-                        id="description"
-                        required
-                    />
+                    {#if paid}
+                        <label for="description">Price</label>
+                        <input
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            type="number"
+                            min="1"
+                            bind:value={price}
+                            id="description"
+                            required={paid}
+                        />
+                    {/if}
                     <div class="grid grid-cols-2 gap-4 mt-4">
                         <!-- Example of a single checkbox styled using Tailwind -->
                         <div>
