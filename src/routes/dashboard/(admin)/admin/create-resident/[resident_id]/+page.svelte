@@ -112,6 +112,7 @@
                     type="date"
                     id="dateOfBirth"
                     bind:value={resident_data.date_of_birth}
+                    max={new Date().toISOString().split('T')[0]}
                 />
 
                 <label for="address">Address:</label>
