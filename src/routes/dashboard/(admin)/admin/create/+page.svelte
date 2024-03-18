@@ -135,6 +135,7 @@
                         bind:value={info.date_of_birth}
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5"
                         placeholder="Date of Birth*"
+                        max={new Date().toISOString().split('T')[0]}
                         required
                     />
                 </div>

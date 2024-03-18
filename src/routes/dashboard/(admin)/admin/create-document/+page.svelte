@@ -241,6 +241,18 @@
                                 <span class="ml-2">OR Number</span>
                             </label>
                         </div>
+
+                        <div>
+                            <label class="flex items-center">
+                                <input
+                                    class="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:border-gray-600"
+                                    type="checkbox"
+                                    value="purpose"
+                                    on:change={handleCheckboxChange}
+                                />
+                                <span class="ml-2">Purpose</span>
+                            </label>
+                        </div>
                         <!-- Additional checkboxes can be added similarly -->
                     </div>
 
