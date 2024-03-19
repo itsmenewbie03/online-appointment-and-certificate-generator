@@ -8,6 +8,7 @@
     let residents = []
     let document_id
     let or_number
+    let purpose
     let read_only = false
 
     const select_resident = (event) => {
@@ -61,6 +62,7 @@
                 document_id: document_id,
                 resident_data: info,
                 or_number: or_number,
+                purpose: purpose,
             }),
         }
 
@@ -201,6 +203,36 @@
                         required
                     />
                 </div>
+
+                <div class="mb-2">
+                    <div class="flex w-full">
+                        <input
+                            type="number"
+                            id="residency-value"
+                            bind:value={period_of_residency_value}
+                            readonly={read_only}
+                            class="form-input rounded-l-md bg-gray-50 border border-gray-300 text-gray-900"
+                            placeholder="Period of Residency*"
+                            min="1"
+                            required
+                        />
+                        <select
+                            id="residency-unit"
+                            bind:value={period_of_residency_unit}
+                            disabled={read_only}
+                            class="form-select rounded-r-md bg-gray-50 border border-gray-300 text-gray-900 w-full"
+                            required
+                        >
+                            <option value="" disabled selected
+                                >Select Unit*</option
+                            >
+                            <option value="days">Day(s)</option>
+                            <option value="weeks">Week(s)</option>
+                            <option value="months">Month(s)</option>
+                            <option value="years">Year(s)</option>
+                        </select>
+                    </div>
+                </div>
             </div>
             <div>
                 <div class="mb-2">
@@ -258,33 +290,13 @@
                 </div>
 
                 <div class="mb-2">
-                    <div class="flex w-full">
-                        <input
-                            type="number"
-                            id="residency-value"
-                            bind:value={period_of_residency_value}
-                            readonly={read_only}
-                            class="form-input rounded-l-md bg-gray-50 border border-gray-300 text-gray-900"
-                            placeholder="Period of Residency*"
-                            min="1"
-                            required
-                        />
-                        <select
-                            id="residency-unit"
-                            bind:value={period_of_residency_unit}
-                            disabled={read_only}
-                            class="form-select rounded-r-md bg-gray-50 border border-gray-300 text-gray-900 w-full"
-                            required
-                        >
-                            <option value="" disabled selected
-                                >Select Unit*</option
-                            >
-                            <option value="days">Day(s)</option>
-                            <option value="weeks">Week(s)</option>
-                            <option value="months">Month(s)</option>
-                            <option value="years">Year(s)</option>
-                        </select>
-                    </div>
+                    <input
+                        type="text"
+                        id="contact"
+                        bind:value={purpose}
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5"
+                        placeholder="Purpose"
+                    />
                 </div>
             </div>
 

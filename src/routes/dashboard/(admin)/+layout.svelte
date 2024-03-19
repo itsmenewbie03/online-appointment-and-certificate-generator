@@ -71,52 +71,64 @@
                     <span class="ml-3">Home</span>
                 </a>
             </li>
+            <!-- <li> -->
+            <!--     <button -->
+            <!--         type="button" -->
+            <!--         class="flex items-center w-full p-2 text-base text-gray-600 transition duration-75 rounded-lg group hover:bg-green-300 dark:text-white dark:hover:bg-gray-700" -->
+            <!--         aria-controls="dropdown-example" -->
+            <!--         data-collapse-toggle="dropdown-example" -->
+            <!--         on:click={toggleDropdown} -->
+            <!--     > -->
+            <!--         <span class="flex-1 ml-3 text-left whitespace-nowrap" -->
+            <!--             >Document</span -->
+            <!--         > -->
+            <!--         <svg -->
+            <!--             class="w-3 h-3" -->
+            <!--             aria-hidden="true" -->
+            <!--             xmlns="http://www.w3.org/2000/svg" -->
+            <!--             fill="none" -->
+            <!--             viewBox="0 0 10 6" -->
+            <!--         > -->
+            <!--             <path -->
+            <!--                 stroke="currentColor" -->
+            <!--                 stroke-linecap="round" -->
+            <!--                 stroke-linejoin="round" -->
+            <!--                 stroke-width="2" -->
+            <!--                 d="m1 1 4 4 4-4" -->
+            <!--             /> -->
+            <!--         </svg> -->
+            <!--     </button> -->
+            <!--     {#if isDropdownVisible} -->
+            <!--         <ul id="dropdown-example" class="py-2 space-y-2"> -->
+            <!--             <li> -->
+            <!--                 <a -->
+            <!--                     href="/dashboard/admin/documents" -->
+            <!--                     class="flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-11 group hover:bg-green-300 dark:text-white dark:hover:bg-gray-700" -->
+            <!--                     >Documents</a -->
+            <!--                 > -->
+            <!--             </li> -->
+            <!--             <li> -->
+            <!--                 <a -->
+            <!--                     href="/dashboard/admin/create-document" -->
+            <!--                     class="flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-11 group hover:bg-green-300 dark:text-white dark:hover:bg-gray-700" -->
+            <!--                     >Create a document</a -->
+            <!--                 > -->
+            <!--             </li> -->
+            <!--         </ul> -->
+            <!--     {/if} -->
+            <!-- </li> -->
+
             <li>
-                <button
-                    type="button"
-                    class="flex items-center w-full p-2 text-base text-gray-600 transition duration-75 rounded-lg group hover:bg-green-300 dark:text-white dark:hover:bg-gray-700"
-                    aria-controls="dropdown-example"
-                    data-collapse-toggle="dropdown-example"
-                    on:click={toggleDropdown}
+                <a
+                    href="/dashboard/admin/create-document"
+                    class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-green-300 dark:hover:bg-gray-700 group"
                 >
-                    <span class="flex-1 ml-3 text-left whitespace-nowrap"
-                        >Document</span
+                    <span class="flex-1 ml-3 whitespace-nowrap"
+                        >Create document</span
                     >
-                    <svg
-                        class="w-3 h-3"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 10 6"
-                    >
-                        <path
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="m1 1 4 4 4-4"
-                        />
-                    </svg>
-                </button>
-                {#if isDropdownVisible}
-                    <ul id="dropdown-example" class="py-2 space-y-2">
-                        <li>
-                            <a
-                                href="/dashboard/admin/documents"
-                                class="flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-11 group hover:bg-green-300 dark:text-white dark:hover:bg-gray-700"
-                                >Documents</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                href="/dashboard/admin/create-document"
-                                class="flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-11 group hover:bg-green-300 dark:text-white dark:hover:bg-gray-700"
-                                >Create a document</a
-                            >
-                        </li>
-                    </ul>
-                {/if}
+                </a>
             </li>
+
             <li>
                 <a
                     href="/dashboard/admin/transactions"
