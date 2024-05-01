@@ -50,7 +50,7 @@
     onMount(() => {
         grecaptcha.ready(() => {
             grecaptcha
-                .execute('6LfKkAgpAAAAAFvfZUAebaKXbqgjDX9a7-Xu6KSN', {
+                .execute(process.env.RECAPTCHA_SITE_KEY, {
                     action: 'submit',
                 })
                 .then((token) => {
